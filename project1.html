@@ -7,37 +7,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0fdfa; /* mint-50 */
+            background-color: #f8f7f4; /* Parchment-like off-white */
+            color: #334155; /* slate-700 */
         }
         .content-card {
             background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.04); /* shadow-md */
             margin-bottom: 2rem; /* mb-8 */
             padding: 2rem; /* p-8 */
+            border: 1px solid #e5e7eb; /* gray-200 */
         }
-        h1, h2, h3 {
-            color: #0f766e; /* mint-700 */
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        h1 {
+            color: #f8f7f4; /* Off-white for header text */
         }
         h2 {
-            border-bottom: 2px solid #ccfbf1; /* mint-200 */
-            padding-bottom: 0.5rem;
+            color: #1e293b; /* slate-800 */
+            border-bottom: 1px solid #cbd5e1; /* slate-300 */
+            padding-bottom: 0.75rem;
             margin-bottom: 1.5rem;
         }
+        h3 {
+            color: #334155; /* slate-700 */
+        }
         .code-snippet {
-            background-color: #1e293b; /* slate-800 */
-            color: #e2e8f0; /* slate-200 */
+            background-color: #1f2937; /* gray-800 */
+            color: #d1d5db; /* gray-300 */
             padding: 1rem;
-            border-radius: 0.5rem; /* rounded-md */
+            border-radius: 0.375rem; /* rounded-md */
             font-family: 'Courier New', Courier, monospace;
             white-space: pre-wrap;
             word-wrap: break-word;
             margin-top: 0.5rem;
             margin-bottom: 1rem;
+            border: 1px solid #374151; /* gray-700 */
         }
         ul {
             list-style-type: disc;
@@ -46,17 +56,30 @@
         li {
             margin-bottom: 0.5rem;
         }
+        header {
+            background-color: #334155; /* slate-700 */
+        }
+        footer {
+            background-color: #1e293b; /* slate-800 */
+            color: #9ca3af; /* gray-400 */
+        }
+        strong {
+            color: #111827; /* gray-900 */
+        }
+        .container {
+            max-width: 800px; /* Limit content width for better readability */
+        }
     </style>
 </head>
 <body class="text-slate-700">
-    <header class="bg-mint-600 text-white py-12">
+    <header class="py-10">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-white">🐍❓ Project 1: Python Number Guessing Game</h1>
-            <p class="mt-4 text-lg text-mint-100">A Guide to Building Your First Interactive Python Game (Logic & Concepts)</p>
+            <h1 class="text-4xl md:text-5xl font-bold">🐍❓ Project 1: Python Number Guessing Game</h1>
+            <p class="mt-4 text-lg text-slate-300">A Guide to Building Your First Interactive Python Game (Logic & Concepts)</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-10">
         <section class="content-card">
             <h2 class="text-3xl font-semibold">🎯 Project Goal</h2>
             <p class="mb-4">To create a Python program where:</p>
@@ -72,52 +95,100 @@
         <section class="content-card">
             <h2 class="text-3xl font-semibold">🧠 What You'll Learn (Key Concepts)</h2>
             <ul class="space-y-2">
-                <li><strong>Variables:</strong> How to create containers to store changing information.</li>
-                <li><strong>User Input:</strong> How your program can ask the player for information.</li>
-                <li><strong>Random Number Generation:</strong> Making the computer do something unpredictable.</li>
-                <li><strong>Loops (<code>while</code> loops):</strong> Repeating code as long as a condition is true.</li>
-                <li><strong>Conditional Logic (<code>if</code>, <code>elif</code>, <code>else</code>):</strong> Making decisions in your code.</li>
-                <li><strong>Data Type Conversion:</strong> Changing text input into a number.</li>
-                <li><strong>Output:</strong> Displaying messages to the player.</li>
-                <li><strong>Functions (optional but good practice):</strong> Grouping related code.</li>
-                <li><strong>Error Handling (optional but good practice):</strong> Managing invalid user input.</li>
+                <li><strong>Variables:</strong> Storing changing information.</li>
+                <li><strong>User Input:</strong> Getting information from the player.</li>
+                <li><strong>Random Number Generation:</strong> Making the computer pick a number.</li>
+                <li><strong>Loops (<code>while</code> loops):</strong> Repeating code.</li>
+                <li><strong>Conditional Logic (<code>if</code>, <code>elif</code>, <code>else</code>):</strong> Making decisions.</li>
+                <li><strong>Data Type Conversion:</strong> Changing text to numbers.</li>
+                <li><strong>Output:</strong> Displaying messages.</li>
+                <li><strong>Functions (optional but good practice):</strong> Organizing code.</li>
+                <li><strong>Error Handling (optional but good practice):</strong> Managing invalid input.</li>
             </ul>
         </section>
 
         <section class="content-card">
+            <h2 class="text-3xl font-semibold">🛠️ Project Setup with `uv` & Structuring Your Code</h2>
+            <p class="mb-4">Let's set this up as a proper project from the start. This is how professional developers organize their work!</p>
+            <ol class="list-decimal list-inside space-y-3">
+                <li>
+                    <strong>Create a Project Folder:</strong>
+                    <ul class="mt-1">
+                        <li>Open your WSL terminal. Navigate to where you keep your coding projects (e.g., <code class="code-snippet inline-block px-2 py-1 text-sm">cd ~/python-internship</code>).</li>
+                        <li>Create a new folder for this game: <code class="code-snippet inline-block px-2 py-1 text-sm">mkdir number_guessing_game</code></li>
+                        <li>Go into that folder: <code class="code-snippet inline-block px-2 py-1 text-sm">cd number_guessing_game</code></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Initialize the Project with `uv`:</strong>
+                    <ul class="mt-1">
+                        <li>This command creates a <code>pyproject.toml</code> file. This file acts like a configuration or recipe card for your Python project, keeping track of settings and any special Python packages (libraries) your project might need later on.</li>
+                        <li>In your terminal, run: <code class="code-snippet inline-block px-2 py-1 text-sm">uv init</code></li>
+                        <li><code>uv</code> will ask you a few questions (like project name, Python version). You can usually accept the defaults by pressing Enter.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Create a Virtual Environment with `uv`:</strong>
+                    <ul class="mt-1">
+                        <li>A virtual environment is like a private, isolated workspace or sandbox just for this specific project. It keeps all the Python tools and packages for this game separate from other projects and from your main Python installation on your computer. This is super important to avoid conflicts and keep things tidy!</li>
+                        <li>In your terminal, run: <code class="code-snippet inline-block px-2 py-1 text-sm">uv venv</code></li>
+                        <li>This command will create a new folder, usually named <code>.venv</code>, inside your <code>number_guessing_game</code> directory. This <code>.venv</code> folder contains a copy of Python and is where any packages you install for this project will go.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Activate the Virtual Environment:</strong>
+                    <ul class="mt-1">
+                        <li>Before you start writing code or installing any Python packages for your game, you need to "activate" this virtual environment. Activating it tells your terminal to use the Python and tools from your project's special <code>.venv</code> sandbox.</li>
+                        <li>In your terminal, run: <code class="code-snippet inline-block px-2 py-1 text-sm">source .venv/bin/activate</code></li>
+                        <li>When the environment is active, your terminal prompt will usually change (often by adding <code>(.venv)</code> at the beginning). This shows you're now working inside the project's isolated environment.</li>
+                        <li><strong>Important:</strong> You need to run this activation command every time you open a new terminal window to work on this specific project.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong>Create Your Game File:</strong>
+                    <ul class="mt-1">
+                        <li>Now, inside your <code>number_guessing_game</code> folder (and with your virtual environment active), you can create your Python file for the game. Let's call it <code>guesser.py</code>.</li>
+                        <li>You can create this file using VS Code (File > New File), or in the terminal with: <code class="code-snippet inline-block px-2 py-1 text-sm">touch guesser.py</code></li>
+                        <li>To open the entire project folder in VS Code (recommended), make sure you're in the <code>number_guessing_game</code> directory in your terminal, then type: <code class="code-snippet inline-block px-2 py-1 text-sm">code .</code> (that's "code" space "dot").</li>
+                    </ul>
+                </li>
+            </ol>
+            <p class="mt-4">Your project structure should now look something like this:</p>
+            <div class="code-snippet text-sm">
+number_guessing_game/
+├── .venv/                   # Your virtual environment (created by uv venv)
+├── pyproject.toml         # Project configuration (created by uv init)
+└── guesser.py               # Your game code will go in this file
+            </div>
+        </section>
+
+        <section class="content-card">
             <h2 class="text-3xl font-semibold">🤔 Let's Plan It Out (The "Algorithm")</h2>
-            <p class="mb-4">Before you write any code, it's crucial to think about the steps your game needs to follow. This is called an algorithm:</p>
+            <p class="mb-4">Before you write any code in <code>guesser.py</code>, it's crucial to think about the steps your game needs to follow:</p>
             <ol class="list-decimal list-inside space-y-3">
                 <li>
                     <strong>Game Initialization:</strong>
                     <ul class="mt-1">
-                        <li>Display a welcome message to the player.</li>
-                        <li>Explain the rules (e.g., "I'm thinking of a number between 1 and 100.").</li>
+                        <li>Display a welcome message.</li>
+                        <li>Explain the rules.</li>
                     </ul>
                 </li>
                 <li>
                     <strong>Computer's Turn:</strong>
                     <ul class="mt-1">
-                        <li>Instruct the computer to randomly select a whole number within your chosen range. Store this number in a variable.</li>
+                        <li>Randomly select a whole number within a range (e.g., 1 to 100). Store it.</li>
                     </ul>
                 </li>
                 <li>
                     <strong>Game Loop (Player's Turn):</strong>
                     <ul class="mt-1">
-                        <li>Start a loop that will continue until the player guesses the number correctly.</li>
+                        <li>Start a loop that continues until the player guesses correctly.</li>
                         <li>Inside the loop:
                             <ul class="list-circle ml-5 mt-1">
-                                <li>Ask the player to enter their guess.</li>
-                                <li>Read the player's input.</li>
-                                <li>Convert the player's input into a whole number.</li>
-                                <li>(Optional: Increment a counter for guesses.)</li>
-                                <li>Compare the guess to the secret number:
-                                    <ul class="list-disc ml-5 mt-1">
-                                        <li>If too low, tell the player.</li>
-                                        <li>Else if too high, tell the player.</li>
-                                        <li>Else (correct): Congratulate, (optional: show guess count), end the loop.</li>
-                                    </ul>
-                                </li>
+                                <li>Ask for and read the player's guess.</li>
+                                <li>Convert the input to a whole number.</li>
+                                <li>(Optional: Increment guess counter.)</li>
+                                <li>Compare guess to secret: too low, too high, or correct. Provide feedback. If correct, end loop.</li>
                             </ul>
                         </li>
                     </ul>
@@ -125,44 +196,44 @@
                 <li>
                     <strong>Game End:</strong>
                     <ul class="mt-1">
-                        <li>(Optional: Ask if the player wants to play again.)</li>
+                        <li>(Optional: Ask to play again.)</li>
                     </ul>
                 </li>
             </ol>
         </section>
 
         <section class="content-card">
-            <h2 class="text-3xl font-semibold">💻 Step-by-Step Coding Guide (Logic Outline)</h2>
-            <p class="mb-4">Here's an outline of how you might structure your Python code. Think about what Python commands or concepts you'd use for each part.</p>
+            <h2 class="text-3xl font-semibold">💻 Step-by-Step Coding Guide (Logic Outline for <code>guesser.py</code>)</h2>
+            <p class="mb-4">Here's an outline for your Python code in <code>guesser.py</code>.</p>
             <div class="space-y-6">
                 <div>
-                    <h3 class="text-xl font-semibold text-mint-600 mb-2">Step 1: Setting Up</h3>
-                    <p>How will you tell Python you want to use tools for generating random numbers? (Hint: <code>import</code>)</p>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 1: Setting Up</h3>
+                    <p>How do you import the module needed for random numbers?</p>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-mint-600 mb-2">Step 2: Creating a Main Game Function (Good Practice!)</h3>
-                    <p>It's a good idea to put your game's main logic inside a function (e.g., <code>def play_guessing_game():</code>).</p>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 2: Creating a Main Game Function (Good Practice!)</h3>
+                    <p>Define a function like <code>def play_guessing_game():</code>.</p>
                     <p>Inside this function:</p>
                     <ul class="mt-2">
-                        <li><strong>Welcome Messages:</strong> How do you display text to the user?</li>
-                        <li><strong>Generating the Secret Number:</strong> Use the imported random toolkit to pick an integer within a range and store it in a variable.</li>
-                        <li><strong>Initializing Game Variables:</strong> Create variables for number of guesses (start at 0) and a flag for whether the player guessed correctly (start at <code>False</code>).</li>
+                        <li><strong>Welcome Messages:</strong> Use <code>print()</code>.</li>
+                        <li><strong>Generating the Secret Number:</strong> Use the random module. Store in a variable.</li>
+                        <li><strong>Initializing Game Variables:</strong> For guess count and a flag for correct guesses.</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-mint-600 mb-2">Step 3: The Main Game Loop</h3>
-                    <p>How do you create a loop that continues as long as the <code>guessed_correctly</code> flag is <code>False</code>? (Hint: <code>while</code>)</p>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 3: The Main Game Loop</h3>
+                    <p>Use a <code>while</code> loop controlled by your "correct guess" flag.</p>
                     <p>Inside this loop:</p>
                     <ul class="mt-2">
-                        <li><strong>Getting User Input:</strong> Prompt the user and store their response.</li>
-                        <li><strong>Converting Input to a Number:</strong> Convert the text input to an integer. Consider error handling (<code>try-except</code>) for non-numeric input.</li>
-                        <li><strong>Incrementing Guess Count:</strong> Add 1 to your guess counter.</li>
-                        <li><strong>Checking the Guess (Conditional Logic):</strong> Use <code>if</code>, <code>elif</code>, <code>else</code>. Check if the guess is in range, then if too low, too high, or correct. If correct, update the flag to stop the loop.</li>
+                        <li><strong>Getting User Input:</strong> Use <code>input()</code>.</li>
+                        <li><strong>Converting Input:</strong> Use <code>int()</code>. Consider <code>try-except</code> for errors.</li>
+                        <li><strong>Incrementing Guess Count.</strong></li>
+                        <li><strong>Checking the Guess:</strong> Use <code>if</code>, <code>elif</code>, <code>else</code>. Provide hints. If correct, update the flag.</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-mint-600 mb-2">Step 4: Starting the Game</h3>
-                    <p>After defining your main game function, how do you actually make it run when your script is executed? (Hint: call the function, perhaps inside an <code>if __name__ == "__main__":</code> block).</p>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 4: Starting the Game</h3>
+                    <p>Call your game function, typically inside <code>if __name__ == "__main__":</code>.</p>
                 </div>
             </div>
         </section>
@@ -170,51 +241,102 @@
         <section class="content-card">
             <h2 class="text-3xl font-semibold">🚀 Running Your Game (Once Coded)</h2>
             <ol class="list-decimal list-inside space-y-2">
-                <li>Save your Python file (e.g., <code>number_guesser.py</code>).</li>
-                <li>Open your terminal (WSL terminal in VS Code).</li>
-                <li>Navigate to the directory where you saved the file.</li>
-                <li>Run the script using: <code class="code-snippet inline-block px-2 py-1 text-sm">python3 number_guesser.py</code></li>
+                <li>Ensure your virtual environment is active: <code class="code-snippet inline-block px-2 py-1 text-sm">source .venv/bin/activate</code></li>
+                <li>Save your <code>guesser.py</code> file.</li>
+                <li>In your WSL terminal (in VS Code), ensure you are in the <code>number_guessing_game</code> directory.</li>
+                <li>Run the script: <code class="code-snippet inline-block px-2 py-1 text-sm">python guesser.py</code> (or <code>python3 guesser.py</code>)</li>
             </ol>
         </section>
 
         <section class="content-card">
+            <h2 class="text-3xl font-semibold">💾 Saving Your Work with Git & GitHub</h2>
+            <p class="mb-4">After developing your game locally, save it to GitHub. This is essential for backing up your work, tracking changes, and potentially collaborating or sharing.</p>
+            <ol class="list-decimal list-inside space-y-3">
+                <li>
+                    <strong>Create a GitHub Repository:</strong>
+                    <ul class="mt-1">
+                        <li>Go to [GitHub.com](https://github.com/) and log in.</li>
+                        <li>Click the "+" icon (top right) → "New repository".</li>
+                        <li>Name it (e.g., `python-number-guesser`). Add a description. Choose Public/Private.</li>
+                        <li><strong>Important:</strong> Do NOT initialize with a README, .gitignore, or license. Click "Create repository".</li>
+                        <li>Copy the repository URL (HTTPS or SSH) provided by GitHub.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Initialize Git Locally:</strong>
+                    <ul class="mt-1">
+                        <li>In your WSL terminal, ensure you're in your <code>number_guessing_game</code> project directory.</li>
+                        <li>Run: <code class="code-snippet inline-block px-2 py-1 text-sm">git init</code></li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong>Create a `.gitignore` file:</strong>
+                    <ul class="mt-1">
+                        <li>This tells Git to ignore certain files/folders (like your virtual environment, which shouldn't be tracked).</li>
+                        <li>In your project root (<code>number_guessing_game/</code>), create a file named <code>.gitignore</code>.</li>
+                        <li>Add this line to it: <code class="code-snippet inline-block px-2 py-1 text-sm">.venv/</code></li>
+                        <li>Also good to add: <code class="code-snippet inline-block px-2 py-1 text-sm">__pycache__/</code> and <code class="code-snippet inline-block px-2 py-1 text-sm">*.pyc</code></li>
+                        <li>Save the <code>.gitignore</code> file.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Add and Commit Your Files:</strong>
+                    <ul class="mt-1">
+                        <li>Stage all your project files for tracking: <code class="code-snippet inline-block px-2 py-1 text-sm">git add .</code></li>
+                        <li>Commit (save a snapshot) your changes: <code class="code-snippet inline-block px-2 py-1 text-sm">git commit -m "Initial version of number guessing game"</code></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Link to GitHub & Push:</strong>
+                    <ul class="mt-1">
+                        <li>Connect your local repo to the remote GitHub repo: <code class="code-snippet inline-block px-2 py-1 text-sm">git remote add origin YOUR_GITHUB_REPO_URL_HERE</code></li>
+                        <li>Push your committed code to GitHub: <code class="code-snippet inline-block px-2 py-1 text-sm">git push -u origin main</code> (or <code>master</code>).</li>
+                        <li>Refresh your GitHub repository page to see your files.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p class="mt-4">For future changes: <code>git add .</code> → <code>git commit -m "Describe changes"</code> → <code>git push</code>.</p>
+        </section>
+
+        <section class="content-card">
             <h2 class="text-3xl font-semibold">💪 Challenge Yourself (Optional Enhancements)</h2>
-            <p class="mb-4">Once your basic game is working, think about how you could add these features:</p>
             <ul class="space-y-2">
-                <li><strong>Limited Guesses:</strong> Modify your loop and add conditions to stop after a certain number of tries.</li>
-                <li><strong>Play Again Feature:</strong> Ask the player if they want to play again and restart the game logic.</li>
-                <li><strong>Difficulty Levels:</strong> Let the player choose a difficulty to change the number range.</li>
+                <li><strong>Limited Guesses.</strong></li>
+                <li><strong>Play Again Feature.</strong></li>
+                <li><strong>Difficulty Levels.</strong></li>
             </ul>
         </section>
 
         <section class="content-card">
             <h2 class="text-3xl font-semibold">🧐 Understanding Checkpoint</h2>
-            <p class="mb-4">After you've tried to build the game, reflect on these questions to solidify your understanding:</p>
+            <p class="mb-4">Reflect on these questions to solidify your understanding:</p>
             <ol class="list-decimal list-inside space-y-3">
-                <li><strong>Variables & Data Types:</strong> Why are variables essential? Give an example of different types of information you stored. When the player types a number, what data type is it initially, and why is conversion crucial?</li>
-                <li><strong>Control Flow - Loops:</strong> Explain the purpose of a <code>while</code> loop. How did you decide the condition to keep it running or stop it?</li>
-                <li><strong>Control Flow - Conditionals:</strong> Describe how <code>if</code>, <code>elif</code>, and <code>else</code> statements help the game respond to guesses.</li>
-                <li><strong>Input/Output:</strong> Which Python function gets input? Which displays messages?</li>
-                <li><strong>Modularity & Reusability (Functions):</strong> If you used a function for game logic, what are the benefits?</li>
-                <li><strong>Problem Solving & Algorithms:</strong> Why is outlining steps (an algorithm) helpful before coding?</li>
-                <li><strong>Randomness:</strong> Which Python module generates random numbers? How would you pick a random integer between 50 and 75?</li>
-                <li><strong>Error Handling (Conceptual):</strong> What problems occur if a player enters unexpected input? How does <code>try-except</code> help?</li>
+                <li><strong>Variables & Data Types:</strong> Why use variables? What's the initial data type of player input, and why convert it?</li>
+                <li><strong>Control Flow - Loops:</strong> Purpose of a <code>while</code> loop? How did its condition work?</li>
+                <li><strong>Control Flow - Conditionals:</strong> How do <code>if/elif/else</code> direct game responses?</li>
+                <li><strong>Input/Output:</strong> Which functions get input and display messages?</li>
+                <li><strong>Modularity (Functions):</strong> Benefits of using functions for game logic?</li>
+                <li><strong>Problem Solving:</strong> Why plan (algorithm) before coding?</li>
+                <li><strong>Randomness:</strong> Which module for random numbers? How to pick between 50-75?</li>
+                <li><strong>Error Handling:</strong> What if player enters text for a number? How does <code>try-except</code> help?</li>
+                <li><strong>Project Setup:</strong> Why use a virtual environment (`uv venv`)? What's <code>pyproject.toml</code> for?</li>
+                <li><strong>Version Control:</strong> Purpose of Git? Why use GitHub? What does <code>.gitignore</code> do?</li>
             </ol>
         </section>
 
         <section class="content-card">
-            <h2 class="text-3xl font-semibold">🤖 A Note on Using AI (Like Me!)</h2>
+            <h2 class="text-3xl font-semibold">🤖 A Note on Using AI</h2>
             <ul class="space-y-2">
-                <li><strong>Focus on "Why":</strong> If AI helps generate code, understand *why* it's written that way.</li>
-                <li><strong>Break Down Problems:</strong> Ask AI for help on small, specific pieces.</li>
-                <li><strong>Experiment:</strong> Change AI-generated code to see what happens. This is a powerful learning tool.</li>
-                <li><strong>You're the Director:</strong> Use AI as a knowledgeable assistant. You decide the game's fundamental workings.</li>
+                <li><strong>Focus on "Why":</strong> Understand AI-generated code.</li>
+                <li><strong>Break Down Problems:</strong> Ask AI for help on small parts.</li>
+                <li><strong>Experiment:</strong> Change code to see what happens.</li>
+                <li><strong>You're the Director:</strong> Use AI as an assistant.</li>
             </ul>
-            <p class="mt-4">The goal is for *you* to understand the logic and explain how your game works!</p>
+            <p class="mt-4">The goal is for *you* to understand the logic!</p>
         </section>
     </main>
 
-    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+    <footer class="py-8 text-center">
         <p>&copy; Your Coding Journey. Happy Hacking!</p>
     </footer>
 </body>

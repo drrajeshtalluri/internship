@@ -7,37 +7,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fffbeb; /* yellow-50 (Warm Sand) */
+            background-color: #f8f7f4; /* Parchment-like off-white */
+            color: #334155; /* slate-700 */
         }
         .content-card {
             background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.04); /* shadow-md */
             margin-bottom: 2rem; /* mb-8 */
             padding: 2rem; /* p-8 */
+            border: 1px solid #e5e7eb; /* gray-200 */
         }
-        h1, h2, h3 {
-            color: #1e3a8a; /* blue-800 (Deep Blue) */
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        h1 {
+            color: #f8f7f4; /* Off-white for header text */
         }
         h2 {
-            border-bottom: 2px solid #bfdbfe; /* blue-200 */
-            padding-bottom: 0.5rem;
+            color: #1e293b; /* slate-800 */
+            border-bottom: 1px solid #cbd5e1; /* slate-300 */
+            padding-bottom: 0.75rem;
             margin-bottom: 1.5rem;
         }
+        h3 {
+            color: #334155; /* slate-700 */
+        }
         .code-snippet {
-            background-color: #374151; /* gray-700 */
-            color: #f3f4f6; /* gray-100 */
+            background-color: #1f2937; /* gray-800 */
+            color: #d1d5db; /* gray-300 */
             padding: 1rem;
-            border-radius: 0.5rem; /* rounded-md */
+            border-radius: 0.375rem; /* rounded-md */
             font-family: 'Courier New', Courier, monospace;
             white-space: pre-wrap;
             word-wrap: break-word;
             margin-top: 0.5rem;
             margin-bottom: 1rem;
+            border: 1px solid #374151; /* gray-700 */
         }
         ul {
             list-style-type: disc;
@@ -47,23 +57,40 @@
             margin-bottom: 0.5rem;
         }
         .story-map-example {
-            background-color: #fef3c7; /* yellow-100 */
-            border-left: 4px solid #facc15; /* yellow-400 */
+            background-color: #f3f4f6; /* gray-100 */
+            border-left: 4px solid #60a5fa; /* blue-400 */
             padding: 1rem;
             margin-top: 1rem;
             border-radius: 0.25rem;
+            color: #1f2937; /* gray-800 */
+        }
+        .story-map-example h4 {
+            color: #1e3a8a; /* blue-800 */
+        }
+        header {
+            background-color: #334155; /* slate-700 */
+        }
+        footer {
+            background-color: #1e293b; /* slate-800 */
+            color: #9ca3af; /* gray-400 */
+        }
+        strong {
+            color: #111827; /* gray-900 */
+        }
+        .container {
+            max-width: 800px; /* Limit content width for better readability */
         }
     </style>
 </head>
-<body class="text-gray-700">
-    <header class="bg-blue-700 text-white py-12">
+<body class="text-slate-700">
+    <header class="py-10">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-white">🗺️🖋️ Project 2: Python Text-Based Adventure Game</h1>
-            <p class="mt-4 text-lg text-blue-100">A Guide to Crafting Your Own Interactive Story (Logic & Concepts)</p>
+            <h1 class="text-4xl md:text-5xl font-bold">🗺️🖋️ Project 2: Python Text-Based Adventure Game</h1>
+            <p class="mt-4 text-lg text-slate-300">A Guide to Crafting Your Own Interactive Story (Logic & Concepts)</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-10">
         <section class="content-card">
             <h2 class="text-3xl font-semibold">🎯 Project Goal</h2>
             <p class="mb-4">To create a Python program that:</p>
@@ -91,10 +118,65 @@
         </section>
 
         <section class="content-card">
+            <h2 class="text-3xl font-semibold">🛠️ Project Setup with `uv` & Structuring Your Code</h2>
+            <p class="mb-4">Instead of just having a single Python file floating around, let's set this up like a proper project. This is good practice for bigger programs!</p>
+            <ol class="list-decimal list-inside space-y-3">
+                <li>
+                    <strong>Create a Project Folder:</strong>
+                    <ul class="mt-1">
+                        <li>In your WSL terminal, navigate to where you keep your coding projects (e.g., <code>cd ~/python-internship</code>).</li>
+                        <li>Create a new folder for this game: <code class="code-snippet inline-block px-2 py-1 text-sm">mkdir text_adventure_game</code></li>
+                        <li>Move into that folder: <code class="code-snippet inline-block px-2 py-1 text-sm">cd text_adventure_game</code></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Initialize the Project with `uv`:</strong>
+                    <ul class="mt-1">
+                        <li>This step creates a <code>pyproject.toml</code> file. This file is like a recipe card for your Python project – it will keep track of settings and any special Python packages your project might need later.</li>
+                        <li>Run: <code class="code-snippet inline-block px-2 py-1 text-sm">uv init</code></li>
+                        <li>You can accept the defaults for the prompts for now.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Create a Virtual Environment with `uv`:</strong>
+                    <ul class="mt-1">
+                        <li>A virtual environment is a private sandbox for your project's Python tools (packages). This is super important because it keeps each project's needs separate and prevents them from messing with each other or your main Python installation.</li>
+                        <li>Run: <code class="code-snippet inline-block px-2 py-1 text-sm">uv venv</code></li>
+                        <li>This will usually create a folder named <code>.venv</code> inside your project directory. This folder contains a copy of Python and is where packages for *this specific project* will be installed.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Activate the Virtual Environment:</strong>
+                    <ul class="mt-1">
+                        <li>Before you start working on your project or installing packages, you need to "activate" this environment. This tells your terminal to use the Python and tools from your project's <code>.venv</code> folder.</li>
+                        <li>Run: <code class="code-snippet inline-block px-2 py-1 text-sm">source .venv/bin/activate</code></li>
+                        <li>You'll usually see your terminal prompt change (e.g., by adding <code>(.venv)</code> at the beginning) to show that the environment is active.</li>
+                        <li><strong>Remember:</strong> You'll need to activate the virtual environment every time you open a new terminal to work on this project.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong>Create Your Game File:</strong>
+                    <ul class="mt-1">
+                        <li>Now, inside your <code>text_adventure_game</code> folder (and with your virtual environment active), you can create your Python file for the game. Let's call it <code>adventure.py</code>.</li>
+                        <li>You can do this in VS Code, or in the terminal: <code class="code-snippet inline-block px-2 py-1 text-sm">touch adventure.py</code></li>
+                        <li>Open this folder in VS Code: <code class="code-snippet inline-block px-2 py-1 text-sm">code .</code> (if you're in the `text_adventure_game` directory).</li>
+                    </ul>
+                </li>
+            </ol>
+            <p class="mt-4">Your project structure will look something like this:</p>
+            <div class="code-snippet text-sm">
+text_adventure_game/
+├── .venv/                   # Your virtual environment (created by uv venv)
+├── pyproject.toml         # Project configuration (created by uv init)
+└── adventure.py             # Your game code will go here
+            </div>
+        </section>
+
+        <section class="content-card">
             <h2 class="text-3xl font-semibold">🤔 Let's Plan It Out (The "Algorithm" & Story Map)</h2>
             <p class="mb-4">This project *really* benefits from planning your story and its branches before you dive into code.</p>
             
-            <h3 class="text-xl font-semibold text-blue-700 mt-6 mb-2">1. Create a Story Map:</h3>
+            <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-2">1. Create a Story Map:</h3>
             <p class="mb-2">Sketch out your adventure. It can be simple:</p>
             <ul class="space-y-1">
                 <li><strong>Start:</strong> Where does the player begin?</li>
@@ -104,8 +186,8 @@
             </ul>
 
             <div class="story-map-example">
-                <h4 class="font-semibold text-blue-700">Example Story Snippet: The Whispering Woods</h4>
-                <ul class="mt-2 text-sm text-gray-600">
+                <h4 class="font-semibold">Example Story Snippet: The Whispering Woods</h4>
+                <ul class="mt-2 text-sm">
                     <li><strong><code>forest_edge</code> (Function):</strong>
                         <ul class="list-circle ml-5">
                             <li>Description: "You stand at the edge of the Whispering Woods..."</li>
@@ -121,9 +203,9 @@
                 </ul>
             </div>
 
-            <h3 class="text-xl font-semibold text-blue-700 mt-6 mb-2">2. General Algorithm (How the Code Will Work):</h3>
+            <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-2">2. General Algorithm (How the Code Will Work):</h3>
             <ol class="list-decimal list-inside space-y-2">
-                <li>Define a Python function for each "room" or decision point.</li>
+                <li>Define a Python function for each "room" or decision point in your <code>adventure.py</code> file.</li>
                 <li>Inside each function:
                     <ul class="list-circle ml-5 mt-1">
                         <li>Use <code>print()</code> to display the scene description.</li>
@@ -134,20 +216,16 @@
                     </ul>
                 </li>
                 <li>Create a starting function (e.g., <code>start_adventure()</code>).</li>
-                <li>Call the starting function at the end of your script.</li>
+                <li>Call the starting function at the end of your script (inside <code>if __name__ == "__main__":</code>).</li>
             </ol>
         </section>
 
         <section class="content-card">
-            <h2 class="text-3xl font-semibold">💻 Step-by-Step Coding Guide (Logic Outline)</h2>
+            <h2 class="text-3xl font-semibold">💻 Step-by-Step Coding Guide (Logic Outline for <code>adventure.py</code>)</h2>
             <p class="mb-4">Here's how to approach coding your adventure, focusing on the logic.</p>
             <div class="space-y-6">
                 <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 1: Create Your Python File</h3>
-                    <p>In VS Code, create a new file (e.g., <code>my_adventure.py</code>).</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 2: Define Your Story Functions</h3>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 1: Define Your Story Functions</h3>
                     <p>Based on your story map, define functions (e.g., <code>def cave_entrance():</code>).</p>
                     <p>Inside each function's logic:</p>
                     <ul class="mt-2">
@@ -158,18 +236,18 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 3: Linking Functions (Making the Story Flow)</h3>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 2: Linking Functions (Making the Story Flow)</h3>
                     <p>The core is functions calling other functions. If <code>cave_entrance()</code> has choice "1" leading to a dark tunnel, the <code>if</code> block for "1" should call <code>dark_tunnel()</code>.</p>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 4: Creating a Starting Point</h3>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 3: Creating a Starting Point</h3>
                     <p>One main function (e.g., <code>def start_game():</code>) should begin the adventure, printing a welcome and calling the first story location function.</p>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 5: Running the Game</h3>
-                    <p>At the end of your file, call your <code>start_game()</code> function, typically within <code>if __name__ == "__main__":</code>.</p>
+                    <h3 class="text-xl font-semibold text-slate-700 mb-2">Step 4: Running the Game from <code>adventure.py</code></h3>
+                    <p>At the end of your <code>adventure.py</code> file, call your <code>start_game()</code> function, typically within <code>if __name__ == "__main__":</code>.</p>
                     <div class="code-snippet">
-# Example of Logic for One Room/Function:
+# Example of Logic for One Room/Function in adventure.py:
 # def a_crossroads_in_the_forest():
     # 1. Print: "You are at a crossroads. A path goes north, another east."
     # 2. Print: "Choices:"
@@ -192,12 +270,74 @@
         <section class="content-card">
             <h2 class="text-3xl font-semibold">🚀 Running Your Game (Once Coded)</h2>
             <ol class="list-decimal list-inside space-y-2">
-                <li>Save your Python file.</li>
-                <li>Open your WSL terminal in VS Code, navigate to the directory.</li>
-                <li>Run the game: <code class="code-snippet inline-block px-2 py-1 text-sm">python3 my_adventure.py</code></li>
+                <li>Make sure your virtual environment is active: <code class="code-snippet inline-block px-2 py-1 text-sm">source .venv/bin/activate</code></li>
+                <li>Save your <code>adventure.py</code> file.</li>
+                <li>Open your WSL terminal in VS Code, ensure you are in your <code>text_adventure_game</code> project directory.</li>
+                <li>Run the game: <code class="code-snippet inline-block px-2 py-1 text-sm">python adventure.py</code> (or <code>python3 adventure.py</code>)</li>
                 <li>Test all the paths and choices in your story!</li>
             </ol>
         </section>
+        
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">💾 Saving Your Work with Git & GitHub</h2>
+            <p class="mb-4">Once you have your game working locally, it's a great idea to save it to GitHub. This backs up your code and lets you share it or track changes over time.</p>
+            <ol class="list-decimal list-inside space-y-3">
+                <li>
+                    <strong>Create a GitHub Repository:</strong>
+                    <ul class="mt-1">
+                        <li>Go to [GitHub.com](https://github.com/) (make sure you're logged in).</li>
+                        <li>Click the "+" icon in the top right and select "New repository".</li>
+                        <li>Give your repository a name (e.g., `text-adventure-game-python`).</li>
+                        <li>Add a short description (optional).</li>
+                        <li>You can choose to make it Public or Private.</li>
+                        <li><strong>Important:</strong> Do NOT initialize with a README, .gitignore, or license yet. We'll do that locally.</li>
+                        <li>Click "Create repository". GitHub will show you a page with commands; you'll need the HTTPS or SSH URL from there soon.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Initialize Git Locally (in your project folder):</strong>
+                    <ul class="mt-1">
+                        <li>Open your WSL terminal in VS Code, and make sure you are in your <code>text_adventure_game</code> project directory.</li>
+                        <li>Run: <code class="code-snippet inline-block px-2 py-1 text-sm">git init</code></li>
+                        <li>This creates a hidden <code>.git</code> folder in your project, which is where Git tracks everything.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong>Create a `.gitignore` file:</strong>
+                    <ul class="mt-1">
+                        <li>This file tells Git which files or folders to ignore (like your virtual environment).</li>
+                        <li>Create a file named <code>.gitignore</code> in your project root (<code>text_adventure_game/</code>).</li>
+                        <li>Add this line to it: <code class="code-snippet inline-block px-2 py-1 text-sm">.venv/</code></li>
+                        <li>Save the file.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Add and Commit Your Files:</strong>
+                    <ul class="mt-1">
+                        <li>Tell Git to track your project files: <code class="code-snippet inline-block px-2 py-1 text-sm">git add .</code> (the dot means "all files in the current directory and subdirectories").</li>
+                        <li>Save a snapshot (a "commit") of your project: <code class="code-snippet inline-block px-2 py-1 text-sm">git commit -m "Initial version of text adventure game"</code> (the message describes your changes).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Link Local Repo to GitHub Repo:</strong>
+                    <ul class="mt-1">
+                        <li>Get the repository URL (HTTPS or SSH) from the GitHub page you created in step 1.</li>
+                        <li>In your terminal, run: <code class="code-snippet inline-block px-2 py-1 text-sm">git remote add origin YOUR_GITHUB_REPO_URL_HERE</code> (replace with your actual URL).</li>
+                        <li>Verify it: <code class="code-snippet inline-block px-2 py-1 text-sm">git remote -v</code> (should show "origin" with your URL).</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong>Push Your Code to GitHub:</strong>
+                    <ul class="mt-1">
+                        <li>Send your committed changes to your GitHub repository: <code class="code-snippet inline-block px-2 py-1 text-sm">git push -u origin main</code> (or <code>master</code> if that's your default branch name).</li>
+                        <li>You might be asked for your GitHub username and password (or Personal Access Token if using HTTPS, or your SSH key passphrase if using SSH).</li>
+                        <li>Refresh your GitHub repository page in your browser – your files should be there!</li>
+                    </ul>
+                </li>
+            </ol>
+            <p class="mt-4">Now, every time you make significant changes, you can use <code>git add .</code>, <code>git commit -m "Your message"</code>, and <code>git push</code> to update your GitHub repository.</p>
+        </section>
+
 
         <section class="content-card">
             <h2 class="text-3xl font-semibold">💪 Challenge Yourself (Optional Enhancements)</h2>
@@ -220,11 +360,13 @@
                 <li><strong>Game Design & Storytelling:</strong> What makes a choice interesting? How do you plan for different endings and translate that to code?</li>
                 <li><strong>Code Readability and Organization:</strong> Why use clear function names? How does breaking the game into functions improve it?</li>
                 <li><strong>Scope (Conceptual):</strong> If a variable is created inside one function, can another function access it directly? Why is this important?</li>
+                <li><strong>Project Setup:</strong> Why is it beneficial to use a virtual environment (like the one `uv venv` creates) for your Python projects? What is the purpose of the `pyproject.toml` file?</li>
+                <li><strong>Version Control:</strong> What is the basic purpose of Git? Why would you want to push your project to GitHub? What does a `.gitignore` file do?</li>
             </ol>
         </section>
 
         <section class="content-card">
-            <h2 class="text-3xl font-semibold">🤖 A Note on Using AI (Like Me!)</h2>
+            <h2 class="text-3xl font-semibold">🤖 A Note on Using AI</h2>
             <ul class="space-y-2">
                 <li><strong>Brainstorming:</strong> Ask AI for story scenarios or character ideas.</li>
                 <li><strong>Descriptive Text:</strong> Get help writing room descriptions, then personalize them.</li>
@@ -235,7 +377,7 @@
         </section>
     </main>
 
-    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+    <footer class="py-8 text-center">
         <p>&copy; Your Coding Adventure. Create Your World!</p>
     </footer>
 </body>
