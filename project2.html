@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2: Python Text-Based Adventure Game Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fffbeb; /* yellow-50 (Warm Sand) */
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            margin-bottom: 2rem; /* mb-8 */
+            padding: 2rem; /* p-8 */
+        }
+        h1, h2, h3 {
+            color: #1e3a8a; /* blue-800 (Deep Blue) */
+        }
+        h2 {
+            border-bottom: 2px solid #bfdbfe; /* blue-200 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .code-snippet {
+            background-color: #374151; /* gray-700 */
+            color: #f3f4f6; /* gray-100 */
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-md */
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .story-map-example {
+            background-color: #fef3c7; /* yellow-100 */
+            border-left: 4px solid #facc15; /* yellow-400 */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+    <header class="bg-blue-700 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white">🗺️🖋️ Project 2: Python Text-Based Adventure Game</h1>
+            <p class="mt-4 text-lg text-blue-100">A Guide to Crafting Your Own Interactive Story (Logic & Concepts)</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🎯 Project Goal</h2>
+            <p class="mb-4">To create a Python program that:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>Presents the player with a scenario or a starting point in a story.</li>
+                <li>Gives the player a set of choices for what to do next.</li>
+                <li>Based on the player's choice, moves them to a new part of the story with new scenarios and choices.</li>
+                <li>Can have different endings (win, lose, or just different outcomes).</li>
+            </ol>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🧠 What You'll Learn (Key Concepts)</h2>
+            <ul class="space-y-2">
+                <li><strong>Functions:</strong> Crucial for organizing different "rooms" or "scenes" in your story.</li>
+                <li><strong>Conditional Logic (<code>if</code>/<code>elif</code>/<code>else</code>):</strong> Determining what happens based on player choices.</li>
+                <li><strong>User Input:</strong> Getting choices from the player.</li>
+                <li><strong>String Manipulation:</strong> Working with text for story display.</li>
+                <li><strong>Program Flow Control:</strong> Understanding how the program moves through the story.</li>
+                <li><strong>Modular Design:</strong> Breaking a complex story into smaller, manageable functions.</li>
+                <li><strong>Storytelling and Game Design Basics:</strong> Creating engaging scenarios and choices.</li>
+                <li><strong>(Optional) Loops:</strong> For retrying sections or repeating game parts.</li>
+                <li><strong>(Optional) Simple Game State:</strong> Tracking simple things like items found.</li>
+            </ul>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🤔 Let's Plan It Out (The "Algorithm" & Story Map)</h2>
+            <p class="mb-4">This project *really* benefits from planning your story and its branches before you dive into code.</p>
+            
+            <h3 class="text-xl font-semibold text-blue-700 mt-6 mb-2">1. Create a Story Map:</h3>
+            <p class="mb-2">Sketch out your adventure. It can be simple:</p>
+            <ul class="space-y-1">
+                <li><strong>Start:</strong> Where does the player begin?</li>
+                <li><strong>Choices:</strong> What 2-3 choices can the player make?</li>
+                <li><strong>Outcomes/Next Locations:</strong> Where does each choice lead?</li>
+                <li><strong>Branching:</strong> Continue this for each new situation.</li>
+            </ul>
+
+            <div class="story-map-example">
+                <h4 class="font-semibold text-blue-700">Example Story Snippet: The Whispering Woods</h4>
+                <ul class="mt-2 text-sm text-gray-600">
+                    <li><strong><code>forest_edge</code> (Function):</strong>
+                        <ul class="list-circle ml-5">
+                            <li>Description: "You stand at the edge of the Whispering Woods..."</li>
+                            <li>Choices: 1. "Enter woods." (→ <code>deep_woods</code>), 2. "Examine shrine." (→ <code>shrine_encounter</code>), 3. "Leave." (→ Game End)</li>
+                        </ul>
+                    </li>
+                    <li class="mt-1"><strong><code>deep_woods</code> (Function):</strong>
+                        <ul class="list-circle ml-5">
+                            <li>Description: "The trees are thick..."</li>
+                            <li>Choices: ...</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="text-xl font-semibold text-blue-700 mt-6 mb-2">2. General Algorithm (How the Code Will Work):</h3>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>Define a Python function for each "room" or decision point.</li>
+                <li>Inside each function:
+                    <ul class="list-circle ml-5 mt-1">
+                        <li>Use <code>print()</code> to display the scene description.</li>
+                        <li>Use <code>print()</code> to list choices.</li>
+                        <li>Use <code>input()</code> to get the player's choice.</li>
+                        <li>Use <code>if/elif/else</code> to check the choice.</li>
+                        <li>Based on the choice, call another function (next scene) or print a game-ending message.</li>
+                    </ul>
+                </li>
+                <li>Create a starting function (e.g., <code>start_adventure()</code>).</li>
+                <li>Call the starting function at the end of your script.</li>
+            </ol>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">💻 Step-by-Step Coding Guide (Logic Outline)</h2>
+            <p class="mb-4">Here's how to approach coding your adventure, focusing on the logic.</p>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 1: Create Your Python File</h3>
+                    <p>In VS Code, create a new file (e.g., <code>my_adventure.py</code>).</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 2: Define Your Story Functions</h3>
+                    <p>Based on your story map, define functions (e.g., <code>def cave_entrance():</code>).</p>
+                    <p>Inside each function's logic:</p>
+                    <ul class="mt-2">
+                        <li><strong>Displaying the Scene:</strong> Use Python to show text describing the scene.</li>
+                        <li><strong>Presenting Choices:</strong> List the player's options.</li>
+                        <li><strong>Getting Player Input:</strong> Ask for and store the player's choice. Remember <code>input()</code> gives a string. Consider using <code>.lower()</code> or <code>.upper()</code> for case-insensitivity.</li>
+                        <li><strong>Handling Choices with Conditionals:</strong> Use <code>if/elif/else</code>. If a choice is made, call another function or end the game. Handle invalid input.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 3: Linking Functions (Making the Story Flow)</h3>
+                    <p>The core is functions calling other functions. If <code>cave_entrance()</code> has choice "1" leading to a dark tunnel, the <code>if</code> block for "1" should call <code>dark_tunnel()</code>.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 4: Creating a Starting Point</h3>
+                    <p>One main function (e.g., <code>def start_game():</code>) should begin the adventure, printing a welcome and calling the first story location function.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Step 5: Running the Game</h3>
+                    <p>At the end of your file, call your <code>start_game()</code> function, typically within <code>if __name__ == "__main__":</code>.</p>
+                    <div class="code-snippet">
+# Example of Logic for One Room/Function:
+# def a_crossroads_in_the_forest():
+    # 1. Print: "You are at a crossroads. A path goes north, another east."
+    # 2. Print: "Choices:"
+    # 3. Print: "N. Go North"
+    # 4. Print: "E. Go East"
+    # 5. Get player_input (e.g., "N" or "E")
+
+    # 6. If player_input (converted to uppercase) is "N":
+    #    Call the function for the northern_path()
+    # 7. Else if player_input (converted to uppercase) is "E":
+    #    Call the function for the eastern_path()
+    # 8. Else:
+    #    Print: "Invalid direction. You stay at the crossroads."
+    #    Maybe call a_crossroads_in_the_forest() again to let them re-choose.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🚀 Running Your Game (Once Coded)</h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>Save your Python file.</li>
+                <li>Open your WSL terminal in VS Code, navigate to the directory.</li>
+                <li>Run the game: <code class="code-snippet inline-block px-2 py-1 text-sm">python3 my_adventure.py</code></li>
+                <li>Test all the paths and choices in your story!</li>
+            </ol>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">💪 Challenge Yourself (Optional Enhancements)</h2>
+            <ul class="space-y-2">
+                <li><strong>Looping for Invalid Input:</strong> Use a <code>while</code> loop in room functions to keep asking for input until valid.</li>
+                <li><strong>Simple Inventory:</strong> Create a list for inventory. Add items based on choices. Some choices might depend on having an item.</li>
+                <li><strong>More Complex Story:</strong> Add more rooms, choices, and branches.</li>
+                <li><strong>"Look Around" Command:</strong> Add a choice to re-print the room's description.</li>
+            </ul>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🧐 Understanding Checkpoint</h2>
+            <p class="mb-4">After designing and trying to code your text adventure, consider these conceptual questions:</p>
+            <ol class="list-decimal list-inside space-y-3">
+                <li><strong>Functions as Building Blocks:</strong> Why are functions well-suited for organizing this game? How do they represent story parts? What does "calling" a function mean in this context?</li>
+                <li><strong>Conditional Logic for Choices:</strong> How do <code>if/elif/else</code> control the narrative? If a player has three choices, how would you structure conditionals to handle them and invalid input?</li>
+                <li><strong>User Input and Program Response:</strong> What Python function gets player input? Why convert input (e.g., to lowercase/uppercase)?</li>
+                <li><strong>Program Flow:</strong> Trace the "flow of control" for a simple path in your game idea.</li>
+                <li><strong>Game Design & Storytelling:</strong> What makes a choice interesting? How do you plan for different endings and translate that to code?</li>
+                <li><strong>Code Readability and Organization:</strong> Why use clear function names? How does breaking the game into functions improve it?</li>
+                <li><strong>Scope (Conceptual):</strong> If a variable is created inside one function, can another function access it directly? Why is this important?</li>
+            </ol>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🤖 A Note on Using AI (Like Me!)</h2>
+            <ul class="space-y-2">
+                <li><strong>Brainstorming:</strong> Ask AI for story scenarios or character ideas.</li>
+                <li><strong>Descriptive Text:</strong> Get help writing room descriptions, then personalize them.</li>
+                <li><strong>Choice Logic:</strong> Ask for examples of how to code specific choice mechanisms (e.g., needing an item).</li>
+                <li><strong>Debugging Ideas:</strong> If stuck, ask AI for potential reasons why a part of your game isn't working.</li>
+            </ul>
+            <p class="mt-4">The key is to use AI to build *your* vision and understand the Python concepts. The more you understand the "why," the better your adventures will be!</p>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <p>&copy; Your Coding Adventure. Create Your World!</p>
+    </footer>
+</body>
+</html>
