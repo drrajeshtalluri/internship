@@ -27,7 +27,7 @@
             color: #0f172a; /* slate-900 */
             font-weight: 600;
         }
-        .step-item { 
+        .step-item { /* Formerly accordion-item */
             background-color: #ffffff; /* white */
             border-radius: 0.5rem; /* rounded-lg */
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
@@ -35,7 +35,7 @@
             padding: 1rem; /* p-4 */
             margin-bottom: 1rem; /* space-y-4 equivalent */
         }
-        .step-header h3 { 
+        .step-header h3 { /* Formerly accordion-header h3 */
             font-size: 1.125rem; /* text-lg */
             font-weight: 600; /* font-semibold */
             color: #1e293b; /* text-slate-800 */
@@ -87,21 +87,6 @@
          .modal-content-text li {
             margin-bottom: 0.25rem; /* 4px */
         }
-        .command-list dt {
-            font-weight: 600;
-            color: #0f172a; /* slate-900 */
-        }
-        .command-list dd {
-            margin-left: 1.5rem; /* ml-6 */
-            margin-bottom: 0.5rem; /* mb-2 */
-        }
-        .takeaway-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f1f5f9; /* slate-100 */
-        }
-         .takeaway-list li:last-child {
-            border-bottom: none;
-        }
 
     </style>
 </head>
@@ -139,10 +124,6 @@
                  <a href="#next-steps" data-section="next-steps" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
                     <span class="text-xl">🎉</span>
                     <span class="hidden md:inline">Next Steps</span>
-                </a>
-                <a href="#key-takeaways" data-section="key-takeaways" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
-                    <span class="text-xl">🧠</span>
-                    <span class="hidden md:inline">Key Takeaways</span>
                 </a>
             </nav>
         </aside>
@@ -205,37 +186,6 @@
                                 <button class="copy-button">Copy</button>
                                 <code>sudo apt update && sudo apt upgrade -y</code>
                             </div>
-                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
-                                <span class="text-lg">✨</span>
-                                <span>Explain This Step</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-header">
-                            <h3 class="text-lg font-semibold text-slate-800">4. Understanding Basic Linux</h3>
-                        </div>
-                        <div class="step-content">
-                           <p class="text-slate-600 mb-4 step-description">Linux has a different way of organizing files and folders (called directories) than Windows. You'll interact with it using commands in the terminal. Here's a super quick intro:</p>
-                           <h4 class="font-semibold text-slate-700 mt-4 mb-2">Directory Structure:</h4>
-                           <ul class="list-disc list-inside space-y-1 text-slate-600 mb-4 step-instructions">
-                               <li>Everything starts from the "root" directory, shown as <code>/</code>.</li>
-                               <li>Your personal files will usually be in <code>/home/your_username/</code> (or just <code>~</code> as a shortcut).</li>
-                               <li>Common system directories include <code>/bin</code> (essential programs), <code>/etc</code> (configuration files), and <code>/var</code> (variable data like logs).</li>
-                           </ul>
-                           <h4 class="font-semibold text-slate-700 mt-4 mb-2">Basic Commands:</h4>
-                           <dl class="text-slate-600 mb-4 step-instructions command-list">
-                               <dt><code>ls</code></dt><dd>Lists files and directories in your current location.</dd>
-                               <dt><code>cd &lt;directory_name&gt;</code></dt><dd>Changes directory (e.g., <code>cd Documents</code>).</dd>
-                               <dt><code>cd ..</code></dt><dd>Goes up one directory level.</dd>
-                               <dt><code>pwd</code></dt><dd>Prints the working directory (shows your current location).</dd>
-                               <dt><code>mkdir &lt;directory_name&gt;</code></dt><dd>Makes a new directory.</dd>
-                               <dt><code>rm &lt;file_name&gt;</code></dt><dd>Removes a file (be careful!).</dd>
-                               <dt><code>rm -r &lt;directory_name&gt;</code></dt><dd>Removes a directory and its contents (be very careful!).</dd>
-                               <dt><code>cat &lt;file_name&gt;</code></dt><dd>Displays the content of a file.</dd>
-                               <dt><code>man &lt;command&gt;</code></dt><dd>Shows the manual page (help) for a command (e.g., <code>man ls</code>). Press 'q' to quit.</dd>
-                           </dl>
-                           <p class="text-slate-600 mt-2 step-instructions">Don't worry about memorizing all these now! You'll learn them as you go. The terminal is your friend!</p>
                             <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
                                 <span class="text-lg">✨</span>
                                 <span>Explain This Step</span>
@@ -366,20 +316,6 @@
                 <h2 class="text-3xl font-bold text-slate-900 mb-6">💾 Version Control Setup: Git & GitHub</h2>
                  <p class="text-slate-600 mb-8 max-w-3xl">Git is a version control system—think of it as a time machine for your code. GitHub is a website that hosts your Git projects, allowing you to store them online and collaborate with others. Setting this up is a crucial skill for any developer.</p>
                 <div class="space-y-4">
-                    <div class="step-item">
-                        <div class="step-header">
-                            <h3 class="text-lg font-semibold text-slate-800">0. Create a GitHub Account (If You Don't Have One)</h3>
-                        </div>
-                        <div class="step-content">
-                           <p class="text-slate-600 mb-4 step-description">GitHub is a website where you'll store your code projects online. It's like a backup and a way to share your work. If you don't have an account, ask a parent to help you sign up. It's free!</p>
-                           <a href="https://github.com/join" target="_blank" class="text-sky-600 font-semibold hover:underline step-instructions">Create a GitHub Account →</a>
-                           <p class="text-slate-600 mt-4 step-instructions">Once you have an account, you're ready for the next steps.</p>
-                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
-                                <span class="text-lg">✨</span>
-                                <span>Explain This Step</span>
-                            </button>
-                        </div>
-                    </div>
                      <div class="step-item">
                         <div class="step-header">
                             <h3 class="text-lg font-semibold text-slate-800">1. Configure Git</h3>
@@ -402,12 +338,12 @@
                         </div>
                         <div class="step-content">
                            <p class="text-slate-600 mb-4 step-description">An SSH key is a secure way to connect to GitHub without having to type your password every time. Follow these steps in your WSL terminal.</p>
-                            <p class="text-slate-600 mb-2 step-instructions"><b>Step 2a: Create the key.</b> Use your GitHub email.</p>
+                            <p class="text-slate-600 mb-2 step-instructions"><b>Step 2a: Create the key.</b></p>
                             <div class="code-block step-code" onclick="copyCode(this, 'ssh-keygen -t ed25519 -C your.email@example.com')">
                                 <button class="copy-button">Copy</button>
                                 <code>ssh-keygen -t ed25519 -C "your.email@example.com"</code>
                             </div>
-                            <p class="text-slate-600 my-2 step-instructions">Press Enter to accept the defaults when prompted (for file location and passphrase - you can leave passphrase blank for simplicity if you want, but a passphrase is more secure).</p>
+                            <p class="text-slate-600 my-2 step-instructions">Press Enter to accept the defaults when prompted.</p>
                             <p class="text-slate-600 mb-2 step-instructions"><b>Step 2b: Start the SSH agent.</b></p>
                              <div class="code-block step-code" onclick="copyCode(this, 'eval `$(ssh-agent -s)`')">
                                 <button class="copy-button">Copy</button>
@@ -437,11 +373,10 @@
                             </div>
                             <p class="text-slate-600 my-4 step-instructions"><b>Step 3b: Add the key to GitHub's website.</b></p>
                              <ol class="list-decimal list-inside space-y-2 text-slate-600 step-instructions">
-                                <li>Go to your GitHub Settings (click your profile picture in the top-right, then "Settings").</li>
-                                <li>In the left sidebar, click "SSH and GPG keys".</li>
+                                <li>Go to your GitHub Settings > SSH and GPG keys.</li>
                                 <li>Click "New SSH key".</li>
                                 <li>Give it a title (e.g., "My WSL Computer").</li>
-                                <li>Paste the copied key into the "Key" field and click "Add SSH key".</li>
+                                <li>Paste the copied key into the "Key" field and save.</li>
                             </ol>
                             <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
                                 <span class="text-lg">✨</span>
@@ -456,53 +391,15 @@
                 <div class="bg-white p-8 rounded-xl shadow-md text-center">
                     <h2 class="text-3xl font-bold text-slate-900 mb-4">🎉 Setup Complete!</h2>
                     <p class="text-slate-600 mb-6 max-w-2xl mx-auto">Congratulations! You have successfully set up a professional development environment. You're now equipped with the same tools that developers around the world use every day. You're ready to start your first project!</p>
-                    <div class="bg-sky-50 border border-sky-200 p-6 rounded-lg mb-6 text-left">
-                        <h3 class="font-semibold text-sky-800 text-lg mb-2 text-center">Quick Test: Your First `uv` Project</h3>
+                    <div class="bg-sky-50 border border-sky-200 p-6 rounded-lg mb-6">
+                        <h3 class="font-semibold text-sky-800 text-lg mb-2">Quick Test: Your First `uv` Project</h3>
                         <p class="text-sky-700 mb-4">Want to see it all in action? Try initializing a new project. Open your WSL terminal and run these commands:</p>
-                        <p class="text-sky-700 mb-2 text-sm">First, create a directory for your project and navigate into it:</p>
-                        <div class="code-block text-sm" onclick="copyCode(this, `mkdir -p ~/python-internship/test-project\ncd ~/python-internship/test-project`)">
+                        <div class="code-block text-left text-sm" onclick="copyCode(this, `mkdir -p ~/python-internship/test-project\ncd ~/python-internship/test-project\nuv init\nsource .venv/bin/activate`)">
                             <button class="copy-button">Copy</button>
-                            <code>mkdir -p ~/python-internship/test-project<br>cd ~/python-internship/test-project</code>
+                            <code>mkdir -p ~/python-internship/test-project<br>cd ~/python-internship/test-project<br>uv init<br>source .venv/bin/activate</code>
                         </div>
-                        <p class="text-sky-700 mt-4 mb-2 text-sm">Next, initialize your project with `uv`. This creates a <code>pyproject.toml</code> file, which is like a recipe card for your project, keeping track of its settings and Python package needs.</p>
-                        <div class="code-block text-sm" onclick="copyCode(this, `uv init`)">
-                            <button class="copy-button">Copy</button>
-                            <code>uv init</code>
-                        </div>
-                         <p class="text-sky-700 mt-4 mb-2 text-sm">
-                            Now, create a <strong>virtual environment</strong> for this project using <code>uv venv</code>. Think of a virtual environment as a special, isolated sandbox just for this project. Any Python tools or packages you install for this specific project will live inside this sandbox (usually in a folder named <code>.venv</code>) and won't mess with other projects or your main Python setup. This is super important for keeping things organized and avoiding conflicts!
-                         </p>
-                         <div class="code-block text-sm" onclick="copyCode(this, `uv venv`)">
-                            <button class="copy-button">Copy</button>
-                            <code>uv venv</code>
-                        </div>
-                         <p class="text-sky-700 mt-4 mb-2 text-sm">After the virtual environment is created, you need to "activate" or "enter" it. This tells your terminal to use the Python and tools inside this specific sandbox. The command is:</p>
-                         <div class="code-block text-sm" onclick="copyCode(this, `source .venv/bin/activate`)">
-                            <button class="copy-button">Copy</button>
-                            <code>source .venv/bin/activate</code>
-                        </div>
-                        <p class="text-sky-700 mt-4 text-sm">When the environment is active, your terminal prompt will usually change (e.g., showing <code>(.venv)</code> at the beginning). Now you're ready to install packages for this specific project using <code>uv pip install ...</code> and run your Python code within this clean environment!</p>
+                         <p class="text-sky-700 mt-4 text-sm">This creates a new project, sets up an isolated environment with `uv`, and activates it. You're all set to start coding!</p>
                     </div>
-                </div>
-            </section>
-
-            <section id="key-takeaways" class="content-section">
-                <div class="bg-white p-8 rounded-xl shadow-md">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-4">🧠 Key Takeaways: What You Should Know</h2>
-                    <p class="text-slate-600 mb-6">Awesome job on completing the setup! This was a big step. By now, you should have a basic understanding of the tools and concepts we've worked with. Here are some key things to remember:</p>
-                    <ul class="list-none space-y-2 text-slate-700 mb-6 takeaway-list step-description">
-                        <li>What is WSL (Windows Subsystem for Linux) and why do we use it for coding?</li>
-                        <li>What is VS Code and what is its role as your main code editor?</li>
-                        <li>What is Python, and what kind of things can you build with it?</li>
-                        <li>What is <code>uv</code>, and how does it help you manage your Python projects and their special tools (packages)?</li>
-                        <li>What is a Python Virtual Environment, and why is it super important to use one for each project?</li>
-                        <li>What are Git and GitHub, and how do they help you save your code and share it?</li>
-                    </ul>
-                    <p class="text-slate-600 mb-6">Don't worry if you can't explain everything perfectly yet! The more you code, the clearer these will become. Click the button below if you'd like a quick AI-powered refresher on these topics.</p>
-                    <button id="explain-takeaways-button" class="ai-button text-sm font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2 mx-auto">
-                        <span class="text-lg">✨</span>
-                        <span>Explain These Concepts</span>
-                    </button>
                 </div>
             </section>
         </main>
@@ -541,7 +438,7 @@
             const geminiModalCloseX = document.getElementById('gemini-modal-close-x');
             
             const explainStepButtons = document.querySelectorAll('.explain-step-button');
-            const explainTakeawaysButton = document.getElementById('explain-takeaways-button');
+            const getProjectIdeasButton = document.getElementById('get-project-ideas-button');
 
             function navigateTo(sectionId) {
                 sections.forEach(section => {
@@ -568,6 +465,7 @@
                 });
             });
             
+            // Set initial active section (welcome)
             if (sections.length > 0) {
                 sections[0].classList.add('active');
             }
@@ -589,7 +487,7 @@
             }
 
             function displayGeminiResponse(htmlContent) {
-                geminiModalContent.innerHTML = htmlContent.replace(/\n/g, '<br>'); // Basic formatting
+                geminiModalContent.innerHTML = htmlContent.replace(/\n/g, '<br>');
                 geminiLoading.classList.add('hidden');
             }
 
@@ -635,17 +533,15 @@
 
             explainStepButtons.forEach(button => {
                 button.addEventListener('click', async function() {
-                    const stepItem = this.closest('.step-item'); 
+                    const stepItem = this.closest('.step-item'); // Changed from accordionItem
                     const stepTitle = stepItem.querySelector('.step-header h3').textContent.trim();
                     
                     let stepInstructions = "";
                     const descriptionEl = stepItem.querySelector('.step-description');
                     if (descriptionEl) stepInstructions += descriptionEl.innerText.trim() + "\n\n";
                     
-                    const instructionsElements = stepItem.querySelectorAll('.step-instructions');
-                    instructionsElements.forEach(el => {
-                        stepInstructions += el.innerText.trim() + "\n\n";
-                    });
+                    const instructionsEl = stepItem.querySelector('.step-instructions');
+                    if (instructionsEl) stepInstructions += instructionsEl.innerText.trim() + "\n\n";
 
                     const codeEl = stepItem.querySelector('.step-code code');
                     if (codeEl) stepInstructions += "Code example:\n" + codeEl.innerText.trim();
@@ -653,7 +549,7 @@
                     if (stepInstructions.trim() === "") {
                         stepInstructions = "This step involves general setup or information."
                     }
-                    
+
                     const prompt = `You are a friendly and helpful AI assistant. Explain the following computer setup step in simple, encouraging terms for a 12-year-old who is new to coding. The step is titled: '${stepTitle}'. The instructions for this step are: '${stepInstructions}'. Focus on *what* this step does and *why* it's important for their coding journey. Avoid overly technical jargon unless you explain it clearly. Keep the explanation concise and easy to understand. Format your response with paragraphs and bullet points if helpful.`;
                     
                     showGeminiModal(`✨ Explaining: ${stepTitle}`);
@@ -662,20 +558,12 @@
                 });
             });
 
-            if (explainTakeawaysButton) {
-                explainTakeawaysButton.addEventListener('click', async function() {
-                    const takeawaysList = document.querySelector('#key-takeaways .takeaway-list');
-                    let concepts = "The key concepts covered in this setup guide are:\n";
-                    if (takeawaysList) {
-                        takeawaysList.querySelectorAll('li').forEach(li => {
-                            concepts += `- ${li.textContent.trim()}\n`;
-                        });
-                    }
-
-                    const prompt = `You are a friendly AI tutor. I'm a 12-year-old who just finished a computer setup guide. Please explain the following key concepts from the guide in a simple, encouraging, and easy-to-understand way. Explain each one briefly, focusing on what it is and why it's important for someone starting to learn coding. The concepts are:\n${concepts}\n\nMake sure to cover each concept clearly. Use simple language and analogies if helpful.`;
-                    showGeminiModal("✨ Explaining Key Concepts...");
-                    const explanation = await callGeminiAPI(prompt);
-                    displayGeminiResponse(explanation);
+            if (getProjectIdeasButton) {
+                getProjectIdeasButton.addEventListener('click', async function() {
+                    const prompt = "I'm a 12-year-old who just finished setting up my Python development environment (WSL, VS Code, Python, uv, Git). Suggest 3 distinct, simple, and fun coding project ideas I can do next to practice. For each idea, give a very brief description (1-2 sentences) and mention what main skills it would help practice. Make the tone encouraging and exciting!";
+                    showGeminiModal("✨ Getting Project Ideas...");
+                    const ideas = await callGeminiAPI(prompt);
+                    displayGeminiResponse(ideas);
                 });
             }
         });
