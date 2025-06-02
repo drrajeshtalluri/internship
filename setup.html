@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Python Internship Setup Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-link.active {
+            background-color: #e2e8f0; /* slate-200 */
+            color: #0f172a; /* slate-900 */
+            font-weight: 600;
+        }
+        .step-item { /* Formerly accordion-item */
+            background-color: #ffffff; /* white */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            border: 1px solid #e2e8f0; /* border-slate-200 */
+            padding: 1rem; /* p-4 */
+            margin-bottom: 1rem; /* space-y-4 equivalent */
+        }
+        .step-header h3 { /* Formerly accordion-header h3 */
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #1e293b; /* text-slate-800 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .code-block {
+            position: relative;
+            background-color: #1e293b; /* slate-800 */
+            color: #e2e8f0; /* slate-200 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #475569; /* slate-600 */
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background-color 0.2s;
+        }
+        .copy-button:hover {
+            background-color: #64748b; /* slate-500 */
+        }
+        .ai-button {
+            background-color: #fbbf24; /* amber-400 */
+            color: #422006; /* amber-900 */
+        }
+        .ai-button:hover {
+            background-color: #f59e0b; /* amber-500 */
+        }
+        .modal-content-text p {
+            margin-bottom: 0.75rem; /* 12px */
+        }
+        .modal-content-text ul {
+            list-style-type: disc;
+            margin-left: 1.25rem; /* 20px */
+            margin-bottom: 0.75rem; /* 12px */
+        }
+         .modal-content-text li {
+            margin-bottom: 0.25rem; /* 4px */
+        }
+
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex min-h-screen">
+        <aside class="w-16 md:w-64 bg-slate-100 border-r border-slate-200 p-2 md:p-4 sticky top-0 h-screen">
+            <h1 class="text-lg md:text-2xl font-bold text-slate-900 mb-6 hidden md:block">
+                <span class="text-sky-600">Dev</span> Setup Guide
+            </h1>
+            <div class="md:hidden text-center mb-6">
+                 <span class="text-2xl font-bold text-sky-600">🚀</span>
+            </div>
+            <nav id="main-nav" class="flex flex-col space-y-2">
+                <a href="#welcome" data-section="welcome" class="nav-link active flex items-center space-x-3 p-2 rounded-lg">
+                    <span class="text-xl">👋</span>
+                    <span class="hidden md:inline">Welcome</span>
+                </a>
+                <a href="#environment" data-section="environment" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
+                    <span class="text-xl">🌍</span>
+                    <span class="hidden md:inline">Environment (WSL)</span>
+                </a>
+                <a href="#editor" data-section="editor" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
+                    <span class="text-xl">✍️</span>
+                    <span class="hidden md:inline">Editor (VS Code)</span>
+                </a>
+                <a href="#tools" data-section="tools" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
+                    <span class="text-xl">🛠️</span>
+                     <span class="hidden md:inline">Python & Tools</span>
+                </a>
+                <a href="#version-control" data-section="version-control" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
+                    <span class="text-xl">💾</span>
+                    <span class="hidden md:inline">Version Control (Git)</span>
+                </a>
+                 <a href="#next-steps" data-section="next-steps" class="nav-link flex items-center space-x-3 p-2 rounded-lg">
+                    <span class="text-xl">🎉</span>
+                    <span class="hidden md:inline">Next Steps</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-4 sm:p-6 md:p-10">
+            <section id="welcome" class="content-section active">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Welcome to Your Python Adventure!</h2>
+                    <p class="text-slate-600 mb-2">This guide will walk you through setting up a professional development environment. It's like gearing up for an epic quest! We'll install all the essential tools you need to start building amazing Python projects and web applications. Follow the steps in the sidebar from top to bottom.</p>
+                    <p class="text-slate-600 mb-6">P.S. Look out for the <span class="ai-button px-1 py-0.5 rounded text-xs inline-block">✨</span> buttons! They use AI to give you simpler explanations or fresh ideas.</p>
+                    <button onclick="navigateTo('environment')" class="bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors">Start with Environment Setup →</button>
+                </div>
+            </section>
+
+            <section id="environment" class="content-section">
+                 <h2 class="text-3xl font-bold text-slate-900 mb-6">🌍 Environment Setup: Windows Subsystem for Linux (WSL)</h2>
+                 <p class="text-slate-600 mb-8 max-w-3xl">WSL is a powerful tool that lets you run a complete Linux environment directly on your Windows machine. Many professional developers use Linux, so this gives you a real-world coding environment right from the start. We'll be installing Ubuntu, a popular version of Linux.</p>
+                <div class="space-y-4">
+                    <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">1. Install WSL</h3>
+                        </div>
+                        <div class="step-content">
+                            <p class="text-slate-600 mb-4 step-description">First, you need to open PowerShell as an Administrator. This gives you the necessary permissions to install WSL. Then, run the installation command.</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600 mb-4 step-instructions">
+                                <li>Click the Windows Start button, type "PowerShell", right-click it, and select "Run as administrator".</li>
+                                <li>In the blue PowerShell window, type or paste the command below and press Enter.</li>
+                            </ol>
+                            <div class="code-block step-code" onclick="copyCode(this, 'wsl --install')">
+                                <button class="copy-button">Copy</button>
+                                <code>wsl --install</code>
+                            </div>
+                            <p class="text-slate-600 mt-4 step-instructions">Your computer will need to restart to complete the installation. Be sure to save any work before you do this.</p>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">2. Set Up Ubuntu</h3>
+                        </div>
+                        <div class="step-content">
+                           <p class="text-slate-600 mb-4 step-description">After your computer restarts, an Ubuntu window should open automatically. If it doesn't, find "Ubuntu" in your Start menu. You'll need to create a username and password for your new Linux system. This is separate from your Windows login.</p>
+                            <p class="text-slate-600 mb-4 step-instructions"><strong>Tip:</strong> When typing your password in a Linux terminal, you won't see any characters. This is a security feature. Just type your password and press Enter.</p>
+                             <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">3. Update Ubuntu</h3>
+                        </div>
+                        <div class="step-content">
+                           <p class="text-slate-600 mb-4 step-description">It's a good practice to update your system's package list to make sure you have access to the latest software versions. Open your Ubuntu terminal and run this command. You'll need to enter the password you just created.</p>
+                            <div class="code-block step-code" onclick="copyCode(this, 'sudo apt update && sudo apt upgrade -y')">
+                                <button class="copy-button">Copy</button>
+                                <code>sudo apt update && sudo apt upgrade -y</code>
+                            </div>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="editor" class="content-section">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">✍️ Editor Setup: Visual Studio Code (VS Code)</h2>
+                <p class="text-slate-600 mb-8 max-w-3xl">VS Code is your coding workshop. It's a powerful and popular text editor with many features that make writing code easier and more efficient. We'll install it and connect it to your WSL environment.</p>
+                <div class="space-y-4">
+                    <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">1. Install VS Code on Windows</h3>
+                        </div>
+                        <div class="step-content">
+                            <p class="text-slate-600 mb-4 step-description">Download the installer from the official website. During installation, accept the defaults and make sure the "Add to PATH" option is checked. This is important as it allows you to launch VS Code from your terminal.</p>
+                            <a href="https://code.visualstudio.com/" target="_blank" class="text-sky-600 font-semibold hover:underline step-instructions">Download VS Code →</a>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">2. Install the WSL Extension</h3>
+                        </div>
+                        <div class="step-content">
+                             <p class="text-slate-600 mb-4 step-description">This extension is the magic that connects VS Code on Windows to your Linux environment in WSL, allowing you to edit files and use the Linux terminal directly within the editor.</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600 mb-4 step-instructions">
+                                <li>Open VS Code.</li>
+                                <li>Go to the Extensions view (click the square icon in the sidebar or press `Ctrl+Shift+X`).</li>
+                                <li>Search for "WSL".</li>
+                                <li>Install the extension published by Microsoft.</li>
+                            </ol>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <section id="tools" class="content-section">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">🛠️ Python & Tools Setup</h2>
+                <p class="text-slate-600 mb-8 max-w-3xl">Now we'll install Python and other essential tools inside your WSL environment. This ensures all your development work is contained within your Linux system.</p>
+                <div class="space-y-4">
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">1. Open a WSL Terminal in VS Code</h3>
+                        </div>
+                        <div class="step-content">
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600 mb-4 step-description step-instructions">
+                                <li>Open VS Code.</li>
+                                <li>Press `Ctrl+Shift+P` to open the Command Palette.</li>
+                                <li>Type `WSL` and select `WSL: New WSL Window`. This opens a new VS Code window connected to Ubuntu.</li>
+                                <li>In this new window, open a terminal (`Terminal > New Terminal`). The prompt should show you're in your Ubuntu system.</li>
+                            </ol>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">2. Install Python</h3>
+                        </div>
+                        <div class="step-content">
+                            <p class="text-slate-600 mb-4 step-description">Run the following command in your WSL terminal to install the Python 3 programming language and its development headers.</p>
+                             <div class="code-block step-code" onclick="copyCode(this, 'sudo apt install python3 python3-dev -y')">
+                                <button class="copy-button">Copy</button>
+                                <code>sudo apt install python3 python3-dev -y</code>
+                            </div>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">3. Install uv (Package Manager)</h3>
+                        </div>
+                        <div class="step-content">
+                           <p class="text-slate-600 mb-4 step-description">`uv` is a modern, extremely fast tool for installing Python packages and managing your project's dependencies. Run this command to install it.</p>
+                             <div class="code-block step-code" onclick="copyCode(this, 'curl -LsSf https://astral.sh/uv/install.sh | sh')">
+                                <button class="copy-button">Copy</button>
+                                <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code>
+                            </div>
+                            <p class="text-slate-600 my-4 step-instructions">After it installs, close and reopen your terminal. Then verify it's working:</p>
+                            <div class="code-block step-code" onclick="copyCode(this, 'uv --version')">
+                                <button class="copy-button">Copy</button>
+                                <code>uv --version</code>
+                            </div>
+                             <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">4. Install Helpful VS Code Extensions</h3>
+                        </div>
+                        <div class="step-content">
+                           <p class="text-slate-600 mb-4 step-description">These extensions will add features like code completion, debugging, and notebook support to VS Code, making your life as a developer much easier. Install these from the Extensions view (`Ctrl+Shift+X`).</p>
+                           <ul class="list-disc list-inside space-y-2 text-slate-600 step-instructions">
+                               <li><b>Python</b> (by Microsoft)</li>
+                               <li><b>Pylance</b> (by Microsoft)</li>
+                               <li><b>Jupyter</b> (by Microsoft)</li>
+                               <li><b>GitLens — Git supercharged</b> (by GitKraken)</li>
+                           </ul>
+                           <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <section id="version-control" class="content-section">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">💾 Version Control Setup: Git & GitHub</h2>
+                 <p class="text-slate-600 mb-8 max-w-3xl">Git is a version control system—think of it as a time machine for your code. GitHub is a website that hosts your Git projects, allowing you to store them online and collaborate with others. Setting this up is a crucial skill for any developer.</p>
+                <div class="space-y-4">
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">1. Configure Git</h3>
+                        </div>
+                        <div class="step-content">
+                           <p class="text-slate-600 mb-4 step-description">First, tell Git who you are. This information will be attached to every change you save. Run these commands in your WSL terminal, replacing the placeholder text with your actual name and GitHub email.</p>
+                             <div class="code-block step-code" onclick="copyCode(this, `git config --global user.name 'Your Name'\ngit config --global user.email 'your.email@example.com'`)">
+                                <button class="copy-button">Copy</button>
+                                <code>git config --global user.name "Your Name"<br>git config --global user.email "your.email@example.com"</code>
+                            </div>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">2. Generate an SSH Key</h3>
+                        </div>
+                        <div class="step-content">
+                           <p class="text-slate-600 mb-4 step-description">An SSH key is a secure way to connect to GitHub without having to type your password every time. Follow these steps in your WSL terminal.</p>
+                            <p class="text-slate-600 mb-2 step-instructions"><b>Step 2a: Create the key.</b></p>
+                            <div class="code-block step-code" onclick="copyCode(this, 'ssh-keygen -t ed25519 -C your.email@example.com')">
+                                <button class="copy-button">Copy</button>
+                                <code>ssh-keygen -t ed25519 -C "your.email@example.com"</code>
+                            </div>
+                            <p class="text-slate-600 my-2 step-instructions">Press Enter to accept the defaults when prompted.</p>
+                            <p class="text-slate-600 mb-2 step-instructions"><b>Step 2b: Start the SSH agent.</b></p>
+                             <div class="code-block step-code" onclick="copyCode(this, 'eval `$(ssh-agent -s)`')">
+                                <button class="copy-button">Copy</button>
+                                <code>eval "$(ssh-agent -s)"</code>
+                            </div>
+                             <p class="text-slate-600 my-2 step-instructions"><b>Step 2c: Add your key to the agent.</b></p>
+                             <div class="code-block step-code" onclick="copyCode(this, 'ssh-add ~/.ssh/id_ed25519')">
+                                <button class="copy-button">Copy</button>
+                                <code>ssh-add ~/.ssh/id_ed25519</code>
+                            </div>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                     <div class="step-item">
+                        <div class="step-header">
+                            <h3 class="text-lg font-semibold text-slate-800">3. Add SSH Key to GitHub</h3>
+                        </div>
+                        <div class="step-content">
+                            <p class="text-slate-600 mb-4 step-description">Now, you need to tell GitHub about your new key.</p>
+                            <p class="text-slate-600 mb-2 step-instructions"><b>Step 3a: Copy your public key.</b> Run this command and copy its entire output.</p>
+                             <div class="code-block step-code" onclick="copyCode(this, 'cat ~/.ssh/id_ed25519.pub')">
+                                <button class="copy-button">Copy</button>
+                                <code>cat ~/.ssh/id_ed25519.pub</code>
+                            </div>
+                            <p class="text-slate-600 my-4 step-instructions"><b>Step 3b: Add the key to GitHub's website.</b></p>
+                             <ol class="list-decimal list-inside space-y-2 text-slate-600 step-instructions">
+                                <li>Go to your GitHub Settings > SSH and GPG keys.</li>
+                                <li>Click "New SSH key".</li>
+                                <li>Give it a title (e.g., "My WSL Computer").</li>
+                                <li>Paste the copied key into the "Key" field and save.</li>
+                            </ol>
+                            <button class="explain-step-button mt-4 ai-button text-sm font-semibold py-2 px-3 rounded-lg transition-colors flex items-center space-x-2">
+                                <span class="text-lg">✨</span>
+                                <span>Explain This Step</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+             <section id="next-steps" class="content-section">
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">🎉 Setup Complete!</h2>
+                    <p class="text-slate-600 mb-6 max-w-2xl mx-auto">Congratulations! You have successfully set up a professional development environment. You're now equipped with the same tools that developers around the world use every day. You're ready to start your first project!</p>
+                    <div class="bg-sky-50 border border-sky-200 p-6 rounded-lg mb-6">
+                        <h3 class="font-semibold text-sky-800 text-lg mb-2">Quick Test: Your First `uv` Project</h3>
+                        <p class="text-sky-700 mb-4">Want to see it all in action? Try initializing a new project. Open your WSL terminal and run these commands:</p>
+                        <div class="code-block text-left text-sm" onclick="copyCode(this, `mkdir -p ~/python-internship/test-project\ncd ~/python-internship/test-project\nuv init\nsource .venv/bin/activate`)">
+                            <button class="copy-button">Copy</button>
+                            <code>mkdir -p ~/python-internship/test-project<br>cd ~/python-internship/test-project<br>uv init<br>source .venv/bin/activate</code>
+                        </div>
+                         <p class="text-sky-700 mt-4 text-sm">This creates a new project, sets up an isolated environment with `uv`, and activates it. You're all set to start coding!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="gemini-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 p-4">
+        <div class="relative mx-auto p-6 border w-full max-w-xl shadow-xl rounded-lg bg-white">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl leading-6 font-bold text-slate-900" id="gemini-modal-title">✨ AI Helper</h3>
+                <button id="gemini-modal-close-x" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+            </div>
+            <div id="gemini-loading" class="hidden my-6 text-center">
+                <div class="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-sky-600 mx-auto"></div>
+                <p class="text-sm text-slate-500 mt-3">AI is thinking...</p>
+            </div>
+            <div id="gemini-modal-content" class="text-sm text-slate-700 text-left space-y-3 modal-content-text" style="max-height: 60vh; overflow-y: auto;">
+                </div>
+            <div class="mt-6 text-right">
+                <button id="gemini-modal-close-button" class="px-4 py-2 bg-sky-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+            
+            const geminiModal = document.getElementById('gemini-modal');
+            const geminiModalTitle = document.getElementById('gemini-modal-title');
+            const geminiModalContent = document.getElementById('gemini-modal-content');
+            const geminiLoading = document.getElementById('gemini-loading');
+            const geminiModalCloseButton = document.getElementById('gemini-modal-close-button');
+            const geminiModalCloseX = document.getElementById('gemini-modal-close-x');
+            
+            const explainStepButtons = document.querySelectorAll('.explain-step-button');
+            const getProjectIdeasButton = document.getElementById('get-project-ideas-button');
+
+            function navigateTo(sectionId) {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.section === sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+                window.scrollTo(0, 0);
+            }
+            window.navigateTo = navigateTo;
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sectionId = this.dataset.section;
+                    navigateTo(sectionId);
+                });
+            });
+            
+            // Set initial active section (welcome)
+            if (sections.length > 0) {
+                sections[0].classList.add('active');
+            }
+            if (navLinks.length > 0) {
+                navLinks[0].classList.add('active');
+            }
+
+
+            function showGeminiModal(title) {
+                geminiModalTitle.textContent = title;
+                geminiModalContent.innerHTML = '';
+                geminiLoading.classList.remove('hidden');
+                geminiModal.classList.remove('hidden');
+            }
+
+            function hideGeminiModal() {
+                geminiModal.classList.add('hidden');
+                geminiLoading.classList.add('hidden');
+            }
+
+            function displayGeminiResponse(htmlContent) {
+                geminiModalContent.innerHTML = htmlContent.replace(/\n/g, '<br>');
+                geminiLoading.classList.add('hidden');
+            }
+
+            geminiModalCloseButton.addEventListener('click', hideGeminiModal);
+            geminiModalCloseX.addEventListener('click', hideGeminiModal);
+            geminiModal.addEventListener('click', (event) => {
+                 if (event.target === geminiModal) { 
+                    hideGeminiModal();
+                }
+            });
+
+
+            async function callGeminiAPI(promptText) {
+                const apiKey = "AIzaSyBk1ZJkarnX_nwD4NXcsvsCQcwl2-0-fFg"; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: promptText }] }]
+                };
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) {
+                        const errorBody = await response.text();
+                        throw new Error(`API Error ${response.status}: ${errorBody}`);
+                    }
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        return result.candidates[0].content.parts[0].text;
+                    } else {
+                        console.warn("Unexpected API response structure:", result);
+                        return "Sorry, I received an unusual response from the AI. Please try again.";
+                    }
+                } catch (error) {
+                    console.error("Gemini API call failed:", error);
+                    return `Sorry, something went wrong: ${error.message}. Please check your internet connection or try again later.`;
+                }
+            }
+
+            explainStepButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const stepItem = this.closest('.step-item'); // Changed from accordionItem
+                    const stepTitle = stepItem.querySelector('.step-header h3').textContent.trim();
+                    
+                    let stepInstructions = "";
+                    const descriptionEl = stepItem.querySelector('.step-description');
+                    if (descriptionEl) stepInstructions += descriptionEl.innerText.trim() + "\n\n";
+                    
+                    const instructionsEl = stepItem.querySelector('.step-instructions');
+                    if (instructionsEl) stepInstructions += instructionsEl.innerText.trim() + "\n\n";
+
+                    const codeEl = stepItem.querySelector('.step-code code');
+                    if (codeEl) stepInstructions += "Code example:\n" + codeEl.innerText.trim();
+
+                    if (stepInstructions.trim() === "") {
+                        stepInstructions = "This step involves general setup or information."
+                    }
+
+                    const prompt = `You are a friendly and helpful AI assistant. Explain the following computer setup step in simple, encouraging terms for a 12-year-old who is new to coding. The step is titled: '${stepTitle}'. The instructions for this step are: '${stepInstructions}'. Focus on *what* this step does and *why* it's important for their coding journey. Avoid overly technical jargon unless you explain it clearly. Keep the explanation concise and easy to understand. Format your response with paragraphs and bullet points if helpful.`;
+                    
+                    showGeminiModal(`✨ Explaining: ${stepTitle}`);
+                    const explanation = await callGeminiAPI(prompt);
+                    displayGeminiResponse(explanation);
+                });
+            });
+
+            if (getProjectIdeasButton) {
+                getProjectIdeasButton.addEventListener('click', async function() {
+                    const prompt = "I'm a 12-year-old who just finished setting up my Python development environment (WSL, VS Code, Python, uv, Git). Suggest 3 distinct, simple, and fun coding project ideas I can do next to practice. For each idea, give a very brief description (1-2 sentences) and mention what main skills it would help practice. Make the tone encouraging and exciting!";
+                    showGeminiModal("✨ Getting Project Ideas...");
+                    const ideas = await callGeminiAPI(prompt);
+                    displayGeminiResponse(ideas);
+                });
+            }
+        });
+        
+        function copyCode(container, textToCopy) {
+            const button = container.querySelector('.copy-button');
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                const originalText = button.textContent;
+                button.textContent = 'Error!';
+                 setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
