@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Guide: Recipe Card Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Scholarly Slate & Parchment" - A professional, muted theme with good contrast. -->
+    <!-- Application Structure Plan: Single static HTML page. Content from the markdown guide is structured into clear, readable sections using cards. Added a new section on visual enhancements and where to find resources. -->
+    <!-- Visualization & Content Choices: All content is textual. Styling focuses on readability, clear hierarchy, and a professional, academic feel. Code snippets (logic outlines) are presented in styled blocks. Goal: Inform & Educate. Method: Styled HTML/Tailwind. Interaction: None (static page). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4; /* Parchment-like off-white */
+            color: #334155; /* slate-700 */
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.04); /* shadow-md */
+            margin-bottom: 2rem; /* mb-8 */
+            padding: 2rem; /* p-8 */
+            border: 1px solid #e5e7eb; /* gray-200 */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        h1 {
+            color: #f8f7f4; /* Off-white for header text */
+        }
+        h2 {
+            color: #1e293b; /* slate-800 */
+            border-bottom: 1px solid #cbd5e1; /* slate-300 */
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            color: #334155; /* slate-700 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        header {
+            background-color: #334155; /* slate-700 */
+        }
+        footer {
+            background-color: #1e293b; /* slate-800 */
+            color: #9ca3af; /* gray-400 */
+        }
+        strong {
+            color: #111827; /* gray-900 */
+        }
+        .container {
+            max-width: 800px; /* Limit content width for better readability */
+        }
+        .resource-link {
+            color: #2563eb; /* blue-600 */
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+        .recipe-card-main {
+            max-width: 750px;
+            margin: 2rem auto; /* Add margin for spacing from header/footer */
+        }
+        .recipe-card-main img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .recipe-card-main h1 {
+            text-align: center;
+            color: #1e293b; /* Dark color for readability on white bg */
+            margin-bottom: 0.5rem;
+        }
+        .recipe-card-main .description {
+            text-align: center;
+            font-style: italic;
+            color: #64748b; /* slate-500 */
+            margin-bottom: 2rem;
+        }
+        .recipe-details-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap; /* Allows stacking on small screens */
+        }
+        .ingredients-section, .instructions-section {
+            flex: 1; /* Both sections try to take up equal space */
+            min-width: 280px; /* Prevent them from getting too squished */
+        }
+    </style>
+</head>
+<body>
+    <header class="py-10">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold">Project Guide: The Recipe Card</h1>
+            <p class="mt-4 text-lg text-slate-300">Styling a Beautiful Recipe Page with HTML & CSS</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-10">
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🎯 Project Goal</h2>
+            <p>To design and build a single, static HTML page that displays a recipe for a fictional (or real!) dish. The page will include the recipe's title, a short description, an image of the dish, a list of ingredients, and a step-by-step list of instructions.</p>
+        </section>
+        
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🧠 What You'll Learn (Key Concepts)</h2>
+            <ul class="space-y-2">
+                <li><strong>HTML Lists</strong>: Mastering Unordered (<code>&lt;ul&gt;</code>) and Ordered (<code>&lt;ol&gt;</code>) lists.</li>
+                <li><strong>Image Handling</strong>: Embedding and styling an image within a layout.</li>
+                <li><strong>CSS for Typography</strong>: Controlling font sizes, weights, and line heights for readability.</li>
+                <li><strong>The CSS Box Model</strong>: Understanding <code>padding</code>, <code>border</code>, and <code>margin</code>.</li>
+                <li><strong>Structuring Content</strong>: Grouping related content into logical containers.</li>
+            </ul>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">📂 Project Setup</h2>
+            <p>Follow these steps in your terminal to create an organized project folder.</p>
+            <ol class="list-decimal list-inside space-y-2 mt-4">
+                <li>Create a directory: <code>mkdir my_recipe_page</code></li>
+                <li>Navigate into it: <code>cd my_recipe_page</code></li>
+                <li>Create your files and an image folder: <code>touch index.html styles.css</code> and <code>mkdir images</code></li>
+                <li>Find a high-quality food image and save it in your `images` folder.</li>
+                <li>Open the project in VS Code: <code>code .</code></li>
+            </ol>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">💻 Step-by-Step Guide (HTML Structure)</h2>
+            <p>First, build the skeleton of your `index.html` file.</p>
+            <ol class="list-decimal list-inside space-y-4 mt-4">
+                <li><strong>Basic Boilerplate:</strong> Start with the standard HTML structure and link your CSS file: <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code>.</li>
+                <li><strong>Main Recipe Container:</strong> Wrap your entire recipe in a main container, like <code>&lt;div class="recipe-card-main"&gt;</code>. This makes it easy to style as a single card.</li>
+                <li><strong>Title, Description, and Image:</strong> Inside the container, add the title (<code>&lt;h1&gt;</code>), a short description (<code>&lt;p&gt;</code>), and the recipe image (<code>&lt;img&gt;</code>). Remember the <code>alt</code> attribute for accessibility!</li>
+                <li><strong>Details Container:</strong> Create a parent <code>&lt;div&gt;</code> to hold both the ingredients and instructions. This will be key for our side-by-side layout (e.g., <code>&lt;div class="recipe-details-container"&gt;</code>).</li>
+                <li><strong>Ingredients Section:</strong> Inside the details container, use a <code>&lt;section&gt;</code> for ingredients. Use an <code>&lt;h2&gt;</code> for the title and an unordered list (<code>&lt;ul&gt;</code>) for the list of ingredients.</li>
+                <li><strong>Instructions Section:</strong> Also inside the details container, use another <code>&lt;section&gt;</code> for instructions. Use an <code>&lt;h2&gt;</code> for the title and an ordered list (<code>&lt;ol&gt;</code>) for the steps, as order is important here.</li>
+            </ol>
+        </section>
+        
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🎨 Step-by-Step Guide (CSS Styling)</h2>
+            <p>Now, bring the recipe to life with `styles.css`.</p>
+            <ol class="list-decimal list-inside space-y-4 mt-4">
+                <li><strong>Basic Body and Font Styles:</strong> Set a `background-color` for the page and default `font-family` and `color` for the `body`.</li>
+                <li><strong>Styling the Main Recipe Card:</strong> Select your main container (`.recipe-card-main`). Give it a `max-width` so it doesn't stretch too wide on big screens, use `margin: 2rem auto;` to center it, give it a white `background-color`, some `padding`, and a subtle `box-shadow` to make it lift off the page.</li>
+                <li><strong>Image Styling:</strong> Make the image responsive by setting `width: 100%;` and `height: auto;`. Add a `border-radius` to soften the corners.</li>
+                <li><strong>Typography:</strong> Style your <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> tags. Choose a nice font-family for headings. Center the `&lt;h1&gt;` and description. Add a bottom border to your <code>&lt;h2&gt;</code> tags for separation.</li>
+                <li><strong>Creating Columns with Flexbox:</strong> This is the key part! Select the <code>.recipe-details-container</code> and apply <code>display: flex;</code>. This will automatically try to place its children (the ingredients and instructions sections) side-by-side. Use <code>gap</code> to add space between them.</li>
+            </ol>
+        </section>
+        
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">✨ Making It Look Even Better</h2>
+            <p>Good design can make a recipe more appealing and easier to follow. Here's how to level up your page.</p>
+            
+            <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-2">1. Finding Inspiration</h3>
+            <p class="mb-2">Look at professional food blogs and recipe websites (like Bon Appétit, Smitten Kitchen, or Serious Eats) to see how they lay out content. Notice their use of high-quality photography, clean fonts, and whitespace.</p>
+
+            <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-2">2. Enhancing with Banners and Images</h3>
+            <p class="mb-2">A great photo is essential for a recipe page.</p>
+            <ul class="space-y-2">
+                <li><strong>High-Quality Photography:</strong> The most important part! Use sites like <a href="https://unsplash.com" target="_blank" class="resource-link">Unsplash</a> and <a href="https://pexels.com" target="_blank" class="resource-link">Pexels</a> to find beautiful, free food photos if you don't have your own.</li>
+                <li><strong>Creating a "Banner":</strong> Instead of just an image, you can make the image a full-width banner at the top of your recipe card by removing padding from the top of the card and making the image's top corners match the card's `border-radius`.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-2">3. Choosing Appetizing Colors & Fonts</h3>
+            <p class="mb-2">Colors can evoke feelings and even tastes! Fonts determine readability.</p>
+            <ul class="space-y-2">
+                <li><strong>Color Palettes:</strong> For food, warm and natural colors often work well (creams, browns, muted greens, warm oranges). Use a tool like <a href="https://coolors.co" target="_blank" class="resource-link">Coolors</a> to find a palette that feels right for your dish.</li>
+                <li><strong>Font Pairing:</strong> Use a decorative or strong font for your headings (<code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>) and a very clean, readable font for the recipe text itself (ingredients, instructions). <a href="https://fonts.google.com" target="_blank" class="resource-link">Google Fonts</a> is perfect for this. Try pairing a "Serif" font for headings with a "Sans-serif" font for body text.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold text-slate-700 mt-6 mb-2">4. Essential HTML & CSS References</h3>
+            <p class="mb-2">When you're stuck or want to learn a new property, these are the best places to go.</p>
+            <ul class="space-y-2">
+                <li><strong>MDN Web Docs:</strong> The ultimate reference for all things web development (HTML, CSS, JavaScript). It has detailed explanations and examples for every tag and property.</li>
+                <li><strong>CSS-Tricks:</strong> This site has fantastic articles and guides on everything CSS, especially for concepts like Flexbox and Grid.</li>
+                <li><strong>A List Apart:</strong> A great blog with in-depth articles about web design and development best practices.</li>
+            </ul>
+        </section>
+
+        <section class="content-card">
+            <h2 class="text-3xl font-semibold">🧐 Understanding Checkpoint</h2>
+            <ol class="list-decimal list-inside space-y-3 mt-4">
+                <li><strong>Lists</strong>: What is the key difference between <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code>? Why was each chosen for its specific section?</li>
+                <li><strong>Images</strong>: What is the purpose of the `alt` attribute on an <code>&lt;img&gt;</code> tag?</li>
+                <li><strong>CSS Selectors</strong>: How would you change the style of *only* the list items (<code>&lt;li&gt;</code>) in the ingredients section?</li>
+                <li><strong>The Box Model</strong>: In the `.recipe-card` CSS, explain what <code>padding</code> and <code>margin</code> are doing.</li>
+                <li><strong>Content Structure</strong>: Why did we wrap the ingredients and instructions in a parent <code>&lt;div&gt;</code>? (Hint: Flexbox).</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="py-8 text-center">
+        <p>&copy; Your Coding Kitchen. Happy Cooking!</p>
+    </footer>
+</body>
+</html>
