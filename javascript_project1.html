@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Beginner's Guide to Interactive JavaScript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+        .code-snippet {
+            background-color: #1e293b;
+            color: #d1d5db;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #334155;
+        }
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* pill shape */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .nav-button.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .nav-button:not(.active) {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+        .nav-button:not(.active):hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .project-card-demo {
+            font-family: sans-serif;
+            background: #f1f5f9;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.05);
+            text-align: center;
+            width: 320px;
+            margin: 1rem auto;
+            border: 1px solid #e2e8f0;
+        }
+        .project-card-demo input, .project-card-demo button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            box-sizing: border-box;
+        }
+        .project-card-demo button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .project-card-demo #greetingOutput {
+            margin-top: 1rem;
+            min-height: 2rem;
+        }
+        .room-card-demo {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 350px;
+            margin: 1rem auto;
+            border: 1px solid #ddd;
+        }
+        .room-card-demo button {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .icon {
+            display: inline-block;
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-slate-800 py-6 shadow-lg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-white">A Beginner's Guide to Interactive JavaScript</h1>
+        </div>
+    </header>
+
+    <nav class="bg-white sticky top-0 z-10 shadow-sm border-b border-slate-200">
+        <div class="container mx-auto px-6 py-3 flex justify-center space-x-2 md:space-x-4">
+            <button id="nav-intro" class="nav-button active">What is JavaScript?</button>
+            <button id="nav-p1" class="nav-button">Project 1: Greeter</button>
+            <button id="nav-p2" class="nav-button">Project 2: Room Switcher</button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-10 max-w-4xl">
+        <!-- Introduction to JavaScript Section -->
+        <section id="content-intro" class="content-section active">
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">What is JavaScript? (And Why Is It So Cool?)</h2>
+                <div class="space-y-4 text-lg leading-relaxed">
+                    <p>Think of building a website like building a house:</p>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li><span class="icon">🏛️</span><strong>HTML is the Frame:</strong> It's the skeleton of your house. It gives the building its structure—walls, floors, roof, rooms. On a website, this means headings, paragraphs, images, and lists. It's the "what."</li>
+                        <li><span class="icon">🎨</span><strong>CSS is the Decoration:</strong> It's the paint, wallpaper, furniture, and lighting. It makes the house look good. On a website, this means colors, fonts, spacing, and layout. It's the "how it looks."</li>
+                    </ul>
+                    <p>But what about the doorbell, the light switches, and the garage door opener? What makes the house actually *do* things? That's where <strong>JavaScript</strong> comes in!</p>
+                    <p class="font-bold text-slate-700 text-xl text-center p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg mt-6"><span class="icon">✨</span>JavaScript is the "magic" that makes a website interactive. It's the "how it works."</p>
+                </div>
+            </div>
+            <div class="content-card">
+                 <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">Core JavaScript Concepts for Beginners</h2>
+                 <div class="space-y-8 text-lg leading-relaxed">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-700"><span class="icon">📦</span>1. Variables: Storing Information</h3>
+                        <p>Imagine you have a box with a label on it. You can put things in the box, and you know what's inside by reading the label. In JavaScript, a <strong>variable</strong> is like that box. We use it to store information like a user's name, a score, or a color.</p>
+                        <p class="mt-2">We often use the keyword <code>const</code> to create a variable that we don't plan on changing. This helps prevent bugs!</p>
+                        <div class="code-snippet">const myName = "Alex"; // A variable named 'myName' now holds the text "Alex"</div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-700"><span class="icon">📜</span>2. Functions: Storing Actions</h3>
+                        <p>A <strong>function</strong> is a block of code that performs a specific task. Think of it like a recipe. You write the recipe once (you "define" the function), give it a name, and then you can "call" that recipe anytime you want to perform that action. This keeps your code organized and prevents you from writing the same code over and over.</p>
+                         <div class="code-snippet">function sayHello() {
+    // Code to say hello goes in here. This is the recipe.
+}
+
+sayHello(); // This line "calls" the recipe and makes it run.
+</div>
+                    </div>
+                    <div>
+                         <h3 class="text-2xl font-semibold text-slate-700"><span class="icon">👂</span>3. Events and Event Listeners: Reacting to the User</h3>
+                         <p>An <strong>event</strong> is an action that happens on the webpage. The most common event is a user clicking a button. Other events include moving the mouse, pressing a key on the keyboard, or submitting a form.</p>
+                         <p class="mt-2">JavaScript can "listen" for these events. We attach an <strong>Event Listener</strong> to an HTML element. It's like telling your dog, "Listen for the doorbell, and when you hear it, bark!" In JavaScript, we say, "Listen for a 'click' on this button, and when it happens, run this function!"</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-700"><span class="icon">🗺️</span>4. The DOM: The JavaScript Map of Your HTML</h3>
+                        <p>This sounds complicated, but it's not! When a browser loads your HTML, it creates an internal map of all your elements—your headings, paragraphs, divs, everything. This map is called the <strong>DOM (Document Object Model)</strong>.</p>
+                        <p class="mt-2">JavaScript uses this DOM map to find and manipulate your HTML elements. To change some text on your page, JavaScript first has to find the right element on its map.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">How Do You Add JavaScript to a Page?</h2>
+                <div class="space-y-4 text-lg leading-relaxed">
+                    <p>Just like you link a CSS file, you link a JavaScript file to your HTML. The best practice is to put it right before the closing <code>&lt;/body&gt;</code> tag.</p>
+                    <p>You create a separate file (e.g., <code>script.js</code>) and link it like this:</p>
+                    <div class="code-snippet">
+                        &lt;script src="script.js" defer&gt;&lt;/script&gt;
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 pl-4 text-base">
+                        <li>The <code>src</code> attribute tells the browser where to find your JavaScript file.</li>
+                        <li>The <code>defer</code> attribute is important! It tells the browser to wait until all the HTML on the page has been loaded before it runs the JavaScript code. This prevents errors where your script tries to find an HTML element that doesn't exist yet.</li>
+                    </ul>
+                    <p>Now, let's learn by doing! Click on the projects above to start building.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 1: Dynamic Greeter Section -->
+        <section id="content-p1" class="content-section">
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">Project 1: The Dynamic Greeter</h2>
+                <p class="text-lg leading-relaxed mb-4">This first project teaches the most fundamental pattern in web apps: <strong>taking user input, processing it, and showing an output.</strong> It's the foundation for making interactive websites.</p>
+                <div class="project-card-demo">
+                     <h1>Dynamic Greeter</h1>
+                     <label for="p1-nameInput">Your Name:</label>
+                     <input type="text" id="p1-nameInput" placeholder="Enter your name">
+                     <label for="p1-colorInput">Favorite Color:</label>
+                     <input type="color" id="p1-colorInput" value="#2563eb">
+                     <button>Show Greeting</button>
+                     <h2 id="p1-greetingOutput">Your greeting will appear here!</h2>
+                 </div>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">📂 Project Setup & Code</h3>
+                 <p class="mb-2">Create a new folder named <code>dynamic_greeter</code> with three files inside: <code>index.html</code>, <code>styles.css</code>, and <code>script.js</code>.</p>
+                 <p>Copy the HTML and CSS code below into their respective files. Your mission is to write the JavaScript to make it work!</p>
+            </div>
+             <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">💻 HTML (<code>index.html</code>)</h3>
+                <div class="code-snippet">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;Dynamic Greeter&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="card"&gt;
+        &lt;h1&gt;Dynamic Greeter&lt;/h1&gt;
+        &lt;label for="nameInput"&gt;Your Name:&lt;/label&gt;
+        &lt;input type="text" id="nameInput" placeholder="Enter your name"&gt;
+        &lt;label for="colorInput"&gt;Favorite Color:&lt;/label&gt;
+        &lt;input type="color" id="colorInput" value="#2563eb"&gt;
+        &lt;button id="greetButton"&gt;Show Greeting&lt;/button&gt;
+        &lt;h2 id="greetingOutput"&gt;&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🎨 CSS (<code>styles.css</code>)</h3>
+                <div class="code-snippet">
+body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+.card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 300px; }
+input, button { width: 100%; padding: 0.5rem; margin-top: 0.5rem; margin-bottom: 1rem; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box; }
+button { background-color: #2563eb; color: white; border: none; cursor: pointer; }
+#greetingOutput { margin-top: 1rem; min-height: 2rem; font-size: 1.25rem; font-weight: bold; }
+                </div>
+            </div>
+             <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🤖 JavaScript Logic Guide (for <code>script.js</code>)</h3>
+                <p class="mb-4">This is your mission! Here's a more detailed guide to the logic you need to write.</p>
+                <ol class="list-decimal list-inside space-y-6">
+                    <li>
+                        <strong><span class="icon">📍</span>Step 1: Select the HTML Elements.</strong>
+                        <p class="mt-1 pl-4">First, your JavaScript needs to "find" the HTML elements it will interact with. We use `document.getElementById('some-id')` for this. This function looks through the DOM for an element with a matching `id` and gives it to our JavaScript. We store these elements in variables (using `const`) so we can refer to them easily.</p>
+                        <div class="code-snippet">// In script.js, create variables for each interactive element:
+const nameInput = document.getElementById('nameInput');
+// Now you do the rest! Create constants for the color input, the button, and the h2 output.
+const colorInput = ...
+const greetButton = ...
+const greetingOutput = ...
+                        </div>
+                    </li>
+                    <li>
+                        <strong><span class="icon">📦</span>Step 2: Create a Function to Contain Your Logic.</strong>
+                         <p class="mt-1 pl-4">To keep our code organized, we'll write our logic inside a function. This is like creating a single "action" that we can trigger later. Let's call it `displayGreeting`. A function is declared with the `function` keyword, its name, parentheses `()`, and curly braces `{}` which hold the code for that action.</p>
+                         <div class="code-snippet">function displayGreeting() {
+    // All of our logic for showing the greeting will go inside here.
+}
+</div>
+                    </li>
+                    <li>
+                        <strong><span class="icon">👂</span>Step 3: Listen for the Click Event.</strong>
+                        <p class="mt-1 pl-4">Right now, our function exists, but nothing is calling it! We need to connect our button to our function. We use `.addEventListener()` to tell the button to listen for a `'click'`. When the click happens, it will automatically run the function we provide.</p>
+                        <div class="code-snippet">// After your function definition, add this line:
+// It tells the button to run our displayGreeting function when a click happens
+greetButton.addEventListener('click', displayGreeting);
+</div>
+                    </li>
+                    <li>
+                        <strong><span class="icon">⚙️</span>Step 4: Implement the Logic (Inside the `displayGreeting` function).</strong>
+                        <p class="mt-1 pl-4">This is where you make things happen! You need to get the user's input and then change the page.</p>
+                        <ul class="list-disc list-inside mt-1 pl-4 space-y-4">
+                            <li><strong>Get the user's name:</strong> To get the text a user has typed into an input box, you read its `.value` property. This gives you the current text inside that box.
+                                <div class="code-snippet">// Inside your function...
+const userName = nameInput.value;</div>
+                            </li>
+                             <li><strong>Get the user's color:</strong> The color picker input works the same way! Its `.value` property will give you the selected color code (e.g., "#ff0000").
+                                <div class="code-snippet">// Inside your function...
+const userColor = colorInput.value;</div>
+                            </li>
+                            <li><strong>Change the output text:</strong> To change the text that appears inside another element (like our empty `<h2>`), you set its `.textContent` property. We'll use a template literal (the string inside backticks ``) to easily mix text with our `userName` variable.
+                                 <div class="code-snippet">// Inside your function...
+greetingOutput.textContent = `Hello, ${userName}!`;</div>
+                            </li>
+                            <li><strong>Change the output color:</strong> To change an element's CSS, you use its `.style` property. The `style` property is an object that contains all the CSS properties you can change.
+                                 <div class="code-snippet">// Inside your function...
+greetingOutput.style.color = userColor;</div>
+                            </li>
+                        </ul>
+                        <p class="mt-2 pl-4">Now, put those four pieces of logic together inside your `displayGreeting` function and test it out!</p>
+                    </li>
+                </ol>
+             </div>
+        </section>
+
+        <!-- Project 2: Room Switcher Section -->
+        <section id="content-p2" class="content-section">
+             <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">Project 2: The Magic Room Switcher</h2>
+                <p class="text-lg leading-relaxed mb-4">This project teaches the core concept needed for a Text-Based Adventure Game: **changing what the user sees by showing and hiding different parts of the page.**</p>
+                <div class="project-card-demo">
+                    <div class="room-card-demo">
+                        <h2>You are in the Blue Room.</h2>
+                        <p>There is a single door in front of you.</p>
+                        <button>Go Through Door</button>
+                    </div>
+                    <div class="room-card-demo hidden">
+                        <h2>You are now in the Golden Room!</h2>
+                        <p>The door back is shimmering.</p>
+                        <button>Go Back</button>
+                    </div>
+                 </div>
+            </div>
+            <div class="content-card">
+                 <h3 class="text-2xl font-semibold text-slate-700 mb-4">📂 Project Setup & Code</h3>
+                 <p class="mb-2">Create a new folder named <code>room_switcher</code> with three files inside: <code>index.html</code>, <code>styles.css</code>, and <code>script.js</code>.</p>
+                 <p>Copy the HTML and CSS code below into their respective files. Your mission is to write the JavaScript to make the room switching work!</p>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">💻 HTML (<code>index.html</code>)</h3>
+                <div class="code-snippet">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;Magic Room Switcher&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;The Magic Rooms&lt;/h1&gt;
+    &lt;!-- Room 1 (Visible by default) --&gt;
+    &lt;div id="room1" class="room-card"&gt;
+        &lt;h2&gt;You are in the Blue Room.&lt;/h2&gt;
+        &lt;p&gt;There is a single door in front of you.&lt;/p&gt;
+        &lt;button id="goToRoom2Button"&gt;Go Through Door&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;!-- Room 2 (Hidden by default) --&gt;
+    &lt;div id="room2" class="room-card hidden"&gt;
+        &lt;h2&gt;You are now in the Golden Room!&lt;/h2&gt;
+        &lt;p&gt;The door back is shimmering.&lt;/p&gt;
+        &lt;button id="goToRoom1Button"&gt;Go Back&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🎨 CSS (<code>styles.css</code>)</h3>
+                <div class="code-snippet">
+body { font-family: sans-serif; background-color: #f0f2f5; text-align: center; padding-top: 2rem; }
+h1 { font-family: 'Lora', serif; margin-bottom: 1rem; }
+.room-card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; margin: 1rem auto; border: 1px solid #ddd;}
+button { background-color: #1e3a8a; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+/* This is the magic class! It makes anything with this class disappear. */
+.hidden { display: none; }
+                </div>
+            </div>
+             <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🤖 JavaScript Logic Guide (for <code>script.js</code>)</h3>
+                <p class="mb-4">Your mission is to make the buttons work! We need to swap the `hidden` class between the two rooms when the buttons are clicked. This is how you'll change scenes in your adventure game.</p>
+                <ol class="list-decimal list-inside space-y-6">
+                    <li>
+                        <strong><span class="icon">📍</span>Step 1: Select All Your Elements.</strong>
+                        <p class="mt-1 pl-4">Just like in the last project, start by creating `const` variables that point to your HTML elements. You'll need four variables this time: one for `room1`, one for `room2`, one for `goToRoom2Button`, and one for `goToRoom1Button`.</p>
+                    </li>
+                    <li>
+                        <strong><span class="icon">👂</span>Step 2: Listen for a Click to go to Room 2.</strong>
+                         <p class="mt-1 pl-4">Add an event listener to the first button (`goToRoom2Button`). When it's clicked, you need to run a function. You can write this function directly inside the event listener using `() => { ... }` (this is called an arrow function, and it's a common shortcut).</p>
+                         <p class="mt-1 pl-4">Inside this function, you need to do two things:</p>
+                         <ul class="list-disc list-inside mt-1 pl-4 space-y-4">
+                            <li><strong>Hide `room1`:</strong> Every HTML element in JavaScript has a property called `classList`, which is like a list of all its CSS classes. We can use the `.add()` method on this list to add a new class to the element. This is how we'll make `room1` disappear.
+                                <div class="code-snippet">// To hide room 1, you will add the 'hidden' class to it
+room1.classList.add('hidden');</div>
+                            </li>
+                            <li><strong>Show `room2`:</strong> To show the other room, we do the opposite. We use the `.remove()` method on its `classList` to take away its `hidden` class.
+                                 <div class="code-snippet">// To show room 2, you will remove the 'hidden' class from it
+room2.classList.remove('hidden');</div>
+                            </li>
+                         </ul>
+                    </li>
+                    <li>
+                        <strong><span class="icon">👂</span>Step 3: Listen for a Click to go back to Room 1.</strong>
+                        <p class="mt-1 pl-4">Now do the exact same thing for the other button (`goToRoom1Button`), but reverse the logic!</p>
+                        <p class="mt-1 pl-4">Add an event listener to it. When it's clicked, the function should:</p>
+                         <ul class="list-disc list-inside mt-1 pl-4 space-y-2">
+                             <li>Hide `room2` by <strong>adding</strong> the `hidden` class to its `classList`.</li>
+                             <li>Show `room1` by <strong>removing</strong> the `hidden` class from its `classList`.</li>
+                         </ul>
+                    </li>
+                </ol>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center mt-10">
+        <p>&copy; Your Coding Journey. Happy Hacking!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = {
+                intro: document.getElementById('nav-intro'),
+                p1: document.getElementById('nav-p1'),
+                p2: document.getElementById('nav-p2'),
+            };
+
+            const contentSections = {
+                intro: document.getElementById('content-intro'),
+                p1: document.getElementById('content-p1'),
+                p2: document.getElementById('content-p2'),
+            };
+
+            function showSection(sectionId) {
+                // Hide all sections
+                for (const id in contentSections) {
+                    contentSections[id].classList.remove('active');
+                }
+                // Deactivate all buttons
+                for (const id in navButtons) {
+                    navButtons[id].classList.remove('active');
+                }
+
+                // Show the target section and activate the target button
+                contentSections[sectionId].classList.add('active');
+                navButtons[sectionId].classList.add('active');
+                window.scrollTo(0,0);
+            }
+
+            navButtons.intro.addEventListener('click', () => showSection('intro'));
+            navButtons.p1.addEventListener('click', () => showSection('p1'));
+            navButtons.p2.addEventListener('click', () => showSection('p2'));
+        });
+    </script>
+</body>
+</html>
