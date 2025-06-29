@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced JavaScript Challenges: The AI Gauntlet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+        .code-snippet {
+            background-color: #1e293b;
+            color: #d1d5db;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #334155;
+        }
+        header {
+            background-color: #4338ca; /* Indigo 700 */
+            background-image: linear-gradient(to right, #4338ca, #6d28d9); /* Indigo to Purple */
+        }
+        footer {
+            background-color: #1e293b; /* slate-800 */
+            color: #9ca3af; /* gray-400 */
+        }
+        strong {
+            color: #1e293b; /* slate-800 */
+        }
+        .container {
+            max-width: 900px;
+        }
+        .challenge-title {
+            color: #4338ca;
+            border-bottom-color: #a5b4fc;
+        }
+        .spec-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        .spec-list li::before {
+            content: '✔️';
+            position: absolute;
+            left: 0;
+            color: #4ade80; /* green-400 */
+            font-weight: bold;
+        }
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* pill shape */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .nav-button.active {
+            background-color: #6d28d9;
+            color: white;
+            border-color: #6d28d9;
+        }
+        .nav-button:not(.active) {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+        .nav-button:not(.active):hover {
+            background-color: #e0e7ff;
+            color: #3730a3;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="py-10 shadow-lg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold text-white">The AI Gauntlet: Advanced Challenges</h1>
+            <p class="mt-4 text-lg text-indigo-200">AI can build anything you ask. But can it build *exactly* what a client wants? Let's find out.</p>
+        </div>
+    </header>
+
+     <nav class="bg-white sticky top-0 z-10 shadow-sm border-b border-slate-200">
+        <div class="container mx-auto px-6 py-3 flex justify-center space-x-2 md:space-x-4">
+            <button id="nav-intro" class="nav-button active">The Challenge</button>
+            <button id="nav-p1" class="nav-button">1. Guess Master 3000</button>
+            <button id="nav-p2" class="nav-button">2. The Chronos Key</button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-10">
+        <section id="content-intro" class="content-section active">
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">From Builder to Architect</h2>
+                <div class="space-y-4 text-lg leading-relaxed">
+                    <p>You've seen that AI is an amazing tool for writing code quickly. That's true! But a professional developer's most important job isn't just writing code—it's <strong>designing systems, solving complex problems, and debugging when things go wrong.</strong></p>
+                    <p>An AI is like a brilliant but very literal assistant. It can build a wall if you ask it to, but it can't design the whole house. That's the architect's job. Your job.</p>
+                    <p>These next two challenges are your architect's blueprints. They have very specific, interconnected rules that a simple prompt like "make a number guessing game" will fail to capture. Your mission is to use any tool you want—including AI—to build these exact specifications. The real test is not in getting the final product, but in figuring out how to direct, correct, and combine the code to meet these complex demands.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge 1: Advanced Number Guessing Game -->
+        <section id="content-p1" class="content-section">
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold challenge-title">Challenge 1: The "Guess Master 3000"</h2>
+                <p class="text-lg leading-relaxed mb-6">This isn't a simple guessing game. It's a dynamic application with multiple states and a detailed user interface. You must build it to these exact specifications.</p>
+                
+                <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Core Logic Specifications</h3>
+                <ul class="spec-list">
+                    <li><strong>Difficulty Levels:</strong> At the start, the player must be presented with three buttons: "Easy (1-50, 10 guesses)", "Medium (1-100, 7 guesses)", and "Hard (1-200, 8 guesses)". Clicking one starts the game with the selected settings.</li>
+                    <li><strong>Temperature Feedback:</strong> Instead of "Too high/low," the feedback must be based on proximity:
+                        <ul class="list-disc list-inside ml-8 mt-2 text-base">
+                            <li><strong>Hot!</strong> (within 5 of the secret number)</li>
+                            <li><strong>Warm</strong> (within 15 of the secret number)</li>
+                            <li><strong>Cold</strong> (within 30 of the secret number)</li>
+                            <li><strong>Freezing!</strong> (more than 30 away)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Hint System:</strong> A "Get a Hint" button must appear only after the 3rd wrong guess. Clicking it costs the player <strong>2 guesses</strong> and reveals if the secret number is even or odd. The button should disappear after being used once.</li>
+                </ul>
+
+                <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">User Interface (UI) Specifications</h3>
+                <ul class="spec-list">
+                    <li><strong>Guess History:</strong> All previous guesses must be displayed in a list on the page. Each guess in the list must show the number guessed and the "temperature" feedback it received (e.g., "75 - Cold").</li>
+                    <li><strong>Dynamic Guesses Remaining Bar:</strong> You must create a visual progress bar that shows how many guesses are left. This bar should start full (green), turn yellow when 3 or fewer guesses remain, and turn red on the last guess.</li>
+                    <li><strong>Input Validation:</strong> The guess input box must prevent the user from guessing the same number twice. If they try, an error message "You already guessed that number!" must appear below the input box for a few seconds.</li>
+                    <li><strong>Win/Loss Screen:</strong> The win or loss message must not just appear as text. It must be a <strong>modal pop-up</strong> that appears over the game. This modal must show the final outcome and contain a "Play Again" button.</li>
+                    <li><strong>Full Reset:</strong> The "Play Again" button in the modal must completely reset the game to the initial difficulty selection screen *without reloading the page*. This means all variables, the guess history, and the progress bar must be reset to their starting states using JavaScript.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Challenge 2: Advanced Text Adventure Game -->
+        <section id="content-p2" class="content-section">
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold challenge-title">Challenge 2: The Chronos Key</h2>
+                <p class="text-lg leading-relaxed mb-6">This is not a simple, linear story. It's a small game system with state that changes based on player actions. The UI must be dynamic and reflect the game's state at all times.</p>
+
+                <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Core Logic Specifications</h3>
+                <ul class="spec-list">
+                    <li><strong>Inventory System:</strong> The player must be able to collect items by making certain choices. The game must track these items in an inventory.</li>
+                    <li><strong>Conditional Choices:</strong> Some choices must only be available if the player has a specific item in their inventory. For example, a "Unlock the chest" choice should only appear if the player has a "key".</li>
+                    <li><strong>Stateful Environment:</strong> An action in one room must be able to change the state of another room. For example, pulling a lever in the "Machine Room" might change the description of the "Main Hall" to say "a secret panel has opened".</li>
+                    <li><strong>Time Limit:</strong> The player only has <strong>15 moves</strong> to finish the game. Each action (moving to a new room, taking an item) costs 1 move. If the counter reaches 0, the game is over.</li>
+                </ul>
+
+                <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">User Interface (UI) Specifications</h3>
+                <ul class="spec-list">
+                    <li><strong>Three-Panel Layout:</strong> The UI must be divided into three distinct, always-visible areas:
+                        <ol class="list-decimal list-inside ml-8 mt-2 text-base">
+                            <li><strong>Main Story Panel:</strong> A large area where the room/scene descriptions are displayed.</li>
+                            <li><strong>Choices Panel:</strong> An area below the story where choices are displayed as <strong>clickable buttons</strong>, not text prompts.</li>
+                            <li><strong>Status Sidebar:</strong> A sidebar on the right that displays:
+                                <ul class="list-disc list-inside ml-6 mt-1">
+                                    <li><strong>Inventory:</strong> A list of items the player is carrying. This list must update immediately when an item is picked up.</li>
+                                    <li><strong>Moves Remaining:</strong> A counter that ticks down with each action.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li><strong>Dynamic Buttons:</strong> The choice buttons must not be static. Your JavaScript must create, show, or hide buttons based on the current room and the player's inventory. If a choice becomes unavailable, its button should be removed from the Choices Panel.</li>
+                    <li><strong>Visual Transitions:</strong> When the player moves to a new room, the text in the Main Story Panel must smoothly fade out, and the new room's text must smoothly fade in. (This requires simple CSS transitions triggered by JavaScript).</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="content-card bg-indigo-50 border-l-4 border-indigo-400">
+             <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6">The Final Requirement: Justify Your Code</h2>
+             <p class="text-lg leading-relaxed">This is the most important rule. For either challenge you choose, you must <strong>comment your JavaScript code</strong>. Don't just write what a line does. Write <strong>WHY</strong> you are doing it that way. This proves you are the architect.</p>
+             <div class="code-snippet mt-4">
+// GOOD COMMENT: Explains the "why"
+// I'm using a function here to reset the game state. This is better than
+// resetting the variables one by one because I can just call resetGame()
+// from multiple places (like the 'Play Again' button and at the start).
+function resetGame() { ... }
+
+// BAD COMMENT: Only says what the code already shows
+// This function resets the game.
+function resetGame() { ... }
+             </div>
+             <p class="text-lg leading-relaxed mt-4">Being able to explain your decisions is the difference between writing code and being a developer.</p>
+        </div>
+    </main>
+
+    <footer class="py-8 text-center">
+        <p>&copy; Your Coding Journey. The Real Challenge Begins Now.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = {
+                intro: document.getElementById('nav-intro'),
+                p1: document.getElementById('nav-p1'),
+                p2: document.getElementById('nav-p2'),
+            };
+
+            const contentSections = {
+                intro: document.getElementById('content-intro'),
+                p1: document.getElementById('content-p1'),
+                p2: document.getElementById('content-p2'),
+            };
+
+            function showSection(sectionId) {
+                for (const id in contentSections) {
+                    contentSections[id].classList.remove('active');
+                }
+                for (const id in navButtons) {
+                    navButtons[id].classList.remove('active');
+                }
+                contentSections[sectionId].classList.add('active');
+                navButtons[sectionId].classList.add('active');
+                window.scrollTo(0,0);
+            }
+
+            navButtons.intro.addEventListener('click', () => showSection('intro'));
+            navButtons.p1.addEventListener('click', () => showSection('p1'));
+            navButtons.p2.addEventListener('click', () => showSection('p2'));
+        });
+    </script>
+</body>
+</html>

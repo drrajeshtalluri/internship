@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment: Build Your First Interactive JS Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #334155;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+        .code-snippet {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #374151;
+        }
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* pill shape */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .nav-button.active {
+            background-color: #1d4ed8;
+            color: white;
+            border-color: #1d4ed8;
+        }
+        .nav-button:not(.active) {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+        .nav-button:not(.active):hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        header {
+            background-color: #1e3a8a; /* blue-800 */
+        }
+        footer {
+            background-color: #1e293b; /* slate-800 */
+            color: #9ca3af; /* gray-400 */
+        }
+        strong {
+            color: #111827; /* gray-900 */
+        }
+        .container {
+            max-width: 900px;
+        }
+        .icon {
+            display: inline-block;
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="py-10 shadow-lg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold text-white">Assignment: Build Your First Interactive JS Games</h1>
+            <p class="mt-4 text-lg text-blue-200">Take your Python logic and bring it to life on the web!</p>
+        </div>
+    </header>
+
+    <nav class="bg-white sticky top-0 z-10 shadow-sm border-b border-slate-200">
+        <div class="container mx-auto px-6 py-3 flex justify-center space-x-2 md:space-x-4">
+            <button id="nav-p1" class="nav-button active">1. Number Guessing Game</button>
+            <button id="nav-p2" class="nav-button">2. Text Adventure Game</button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-10">
+        <!-- Project 1: Number Guessing Game -->
+        <section id="content-p1" class="content-section active">
+            <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6"><span class="icon">🎯</span>Project 1: Web-Based Number Guessing Game</h2>
+                <p class="text-lg leading-relaxed mb-4">Your first challenge is to recreate the number guessing game you built in Python, but this time as an interactive webpage. You already understand the game's logic; this project will teach you how to connect that logic to HTML elements using JavaScript.</p>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">📂 Project Setup Guide</h3>
+                 <p class="mb-2">Create a new folder named <code>js_guessing_game</code>. Inside it, create three files: <code>index.html</code>, <code>styles.css</code>, and <code>script.js</code>. Copy the HTML and CSS below into their respective files. Your mission is to write the JavaScript to make the game work!</p>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">💻 HTML to copy into <code>index.html</code></h3>
+                <div class="code-snippet">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;Number Guessing Game&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="game-container"&gt;
+        &lt;h1&gt;Number Guessing Game&lt;/h1&gt;
+        &lt;p&gt;I'm thinking of a number between 1 and 100. Can you guess it?&lt;/p&gt;
+        &lt;div class="input-area"&gt;
+            &lt;input type="number" id="guessInput" placeholder="Enter your guess"&gt;
+            &lt;button id="guessButton"&gt;Guess&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;p id="feedbackText"&gt;Good luck!&lt;/p&gt;
+        &lt;button id="resetButton" class="hidden"&gt;Play Again?&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🎨 CSS to copy into <code>styles.css</code></h3>
+                <div class="code-snippet">
+body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+.game-container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 350px; }
+h1 { font-family: 'Lora', serif; font-size: 1.75rem; margin-bottom: 0.5rem; }
+p { margin-bottom: 1.5rem; color: #475569; }
+.input-area { display: flex; gap: 0.5rem; }
+input { width: 100%; padding: 0.75rem; border-radius: 4px; border: 1px solid #ccc; font-size: 1rem; }
+button { background-color: #2563eb; color: white; border: none; padding: 0.75rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+#feedbackText { margin-top: 1.5rem; font-size: 1.1rem; font-weight: bold; min-height: 2rem; }
+#resetButton { background-color: #16a34a; margin-top: 1rem; width: 100%; }
+.hidden { display: none; }
+                </div>
+            </div>
+             <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🤖 JavaScript Logic Guide (for <code>script.js</code>)</h3>
+                <p class="mb-4">Here are the steps and concepts you'll need to bring your game to life. Write your code in <code>script.js</code>.</p>
+                <ol class="list-decimal list-inside space-y-6">
+                    <li>
+                        <strong>Step 1: Setup Your Game Variables.</strong>
+                        <p class="mt-1 pl-4">First, set up the game's initial state. You'll need a variable for the secret number. To generate one, use `Math.random()`. The formula `Math.floor(Math.random() * 100) + 1` will give you a whole number between 1 and 100.</p>
+                    </li>
+                    <li>
+                        <strong>Step 2: Select the HTML Elements.</strong>
+                        <p class="mt-1 pl-4">Just like in the build-up projects, use `document.getElementById()` to create variables for all the interactive elements: the guess input (`guessInput`), the guess button (`guessButton`), the feedback text paragraph (`feedbackText`), and the reset button (`resetButton`).</p>
+                    </li>
+                    <li>
+                        <strong>Step 3: Create the Main Game Logic Function.</strong>
+                         <p class="mt-1 pl-4">Create a function, let's call it `checkGuess()`. This function will run every time the player makes a guess.</p>
+                    </li>
+                    <li>
+                        <strong>Step 4: Implement `checkGuess()` Logic.</strong>
+                        <ul class="list-disc list-inside mt-1 pl-4 space-y-4">
+                            <li><strong>Read the User's Guess:</strong> Inside the function, get the value from your `guessInput` element.</li>
+                            <li><strong>Convert to a Number:</strong> The `.value` from an input is always text. You must convert it to a number so you can compare it. Use the `parseInt()` function for this.</li>
+                            <li><strong>Compare the Guess:</strong> Use an `if/elif/else` structure (in JavaScript, that's `if`, `else if`, `else`) to compare the user's number to your secret number variable.</li>
+                            <li><strong>Update Feedback:</strong> Based on the comparison, change the `.textContent` of your `feedbackText` element to "Too high!", "Too low!", or a winning message. You can also change the `.style.color` to red for wrong guesses and green for a correct guess.</li>
+                            <li><strong>Handle the Win:</strong> If the guess is correct, you should probably disable the guess input and button to stop the game, and make the "Play Again" button appear by removing its `hidden` class.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Step 5: Connect Everything with Event Listeners.</strong>
+                        <p class="mt-1 pl-4">Tell your guess button to listen for a `'click'` and run your `checkGuess` function when it happens. You will also need to add a listener to the reset button to reload the page or reset the game state when clicked.</p>
+                    </li>
+                </ol>
+             </div>
+        </section>
+
+        <!-- Project 2: Text Adventure Game -->
+        <section id="content-p2" class="content-section">
+             <div class="content-card">
+                <h2 class="text-3xl font-semibold text-slate-800 border-b pb-3 mb-6"><span class="icon">🗺️</span>Project 2: Web-Based Text Adventure Game</h2>
+                <p class="text-lg leading-relaxed mb-4">This challenge takes the "Room Switcher" concept to the next level. You will create a simple, branching story where the user's choices, presented as buttons, change the scene and the narrative.</p>
+            </div>
+             <div class="content-card">
+                 <h3 class="text-2xl font-semibold text-slate-700 mb-4">📂 Project Setup Guide</h3>
+                 <p class="mb-2">Create a new folder named <code>js_adventure_game</code>. Inside it, create three files: <code>index.html</code>, <code>styles.css</code>, and <code>script.js</code>. Copy the HTML and CSS below. Your mission is to write the JavaScript to navigate the story!</p>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">💻 HTML to copy into <code>index.html</code></h3>
+                <div class="code-snippet">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;Text Adventure&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="game-container"&gt;
+        &lt;div id="story-text"&gt;
+            &lt;!-- Story description will go here --&gt;
+        &lt;/div&gt;
+        &lt;div id="choices-area"&gt;
+            &lt;!-- Choice buttons will be created here by JavaScript --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+            </div>
+            <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🎨 CSS to copy into <code>styles.css</code></h3>
+                <div class="code-snippet">
+body { font-family: sans-serif; background-color: #1e293b; color: #e2e8f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+.game-container { background: #334155; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 500px; border: 1px solid #475569; }
+#story-text { min-height: 150px; border-bottom: 1px solid #475569; padding-bottom: 1rem; margin-bottom: 1rem; font-size: 1.1rem; line-height: 1.6; }
+#choices-area button { display: block; width: 100%; background-color: #4f46e5; color: white; border: none; padding: 0.75rem; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: left; margin-top: 0.5rem; }
+#choices-area button:hover { background-color: #4338ca; }
+                </div>
+            </div>
+             <div class="content-card">
+                <h3 class="text-2xl font-semibold text-slate-700 mb-4">🤖 JavaScript Logic Guide (for <code>script.js</code>)</h3>
+                <p class="mb-4">This is more advanced and requires you to think like a game designer! You'll need to store your story in JavaScript and update the page dynamically.</p>
+                <ol class="list-decimal list-inside space-y-6">
+                    <li>
+                        <strong>Step 1: Plan Your Story & Store it in JavaScript.</strong>
+                        <p class="mt-1 pl-4">Before coding, map out a simple story with choices. The best way to store this in JavaScript is using an **object**. Each key in the object can be an `id` for a story scene. The value for each key can be another object containing the story `text` and an array of `choices`.</p>
+                        <div class="code-snippet">// Example story structure
+const story = {
+    start: {
+        text: "You stand at the edge of a dark forest. A path leads in.",
+        choices: [
+            { text: "Enter the forest", destination: "forest_clearing" },
+            { text: "Run away", destination: "game_over_coward" }
+        ]
+    },
+    forest_clearing: {
+        text: "You find a clearing with a mysterious, glowing chest.",
+        choices: [ /* ... more choices ... */ ]
+    },
+    game_over_coward: {
+        text: "You run home. The adventure ends before it begins.",
+        choices: [] // No choices means the game ends here
+    }
+};</div>
+                    </li>
+                    <li>
+                        <strong>Step 2: Create a Function to Show a Scene.</strong>
+                         <p class="mt-1 pl-4">Create a function called `showScene(sceneId)`. Its job is to take the ID of a scene (like `"start"` or `"forest_clearing"`), find it in your story object, and update the HTML to display it.</p>
+                         <p class="mt-1 pl-4">Inside this function, you will need to:</p>
+                         <ul class="list-disc list-inside mt-1 pl-4 space-y-2">
+                             <li>Find the correct scene object from your main `story` object using the `sceneId`.</li>
+                             <li>Update the `textContent` of the `#story-text` element with the scene's text.</li>
+                             <li>Clear out any old buttons from the `#choices-area`. You can set its `innerHTML` to `''`.</li>
+                             <li>Loop through the `choices` array of the current scene. For each choice object, create a new `<button>` element, set its `textContent`, and add an event listener to it. When that button is clicked, it should call `showScene()` with the `destination` for that choice.</li>
+                             <li>Finally, append the new button to the `#choices-area`.</li>
+                         </ul>
+                    </li>
+                    <li>
+                        <strong>Step 3: Start the Game.</strong>
+                        <p class="mt-1 pl-4">At the end of your script, start the game by calling your function for the very first time with the starting scene's ID.</p>
+                        <div class="code-snippet">showScene('start');</div>
+                    </li>
+                </ol>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center mt-10">
+        <p>&copy; Your Coding Journey. Happy Hacking!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = {
+                p1: document.getElementById('nav-p1'),
+                p2: document.getElementById('nav-p2'),
+            };
+
+            const contentSections = {
+                p1: document.getElementById('content-p1'),
+                p2: document.getElementById('content-p2'),
+            };
+
+            function showSection(sectionId) {
+                for (const id in contentSections) {
+                    contentSections[id].classList.remove('active');
+                }
+                for (const id in navButtons) {
+                    navButtons[id].classList.remove('active');
+                }
+                contentSections[sectionId].classList.add('active');
+                navButtons[sectionId].classList.add('active');
+                window.scrollTo(0,0);
+            }
+
+            navButtons.p1.addEventListener('click', () => showSection('p1'));
+            navButtons.p2.addEventListener('click', () => showSection('p2'));
+
+            // Show Project 1 by default
+            showSection('p1');
+        });
+    </script>
+</body>
+</html>
